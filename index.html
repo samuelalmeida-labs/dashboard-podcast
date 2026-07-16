@@ -65,25 +65,22 @@
         </div>
         
         <div class="flex items-center gap-2.5 w-full md:w-auto justify-end">
-            <button onclick="toggleSetupModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-4 py-3 rounded-xl transition-all flex items-center space-x-2">
-                <i class="fa-solid fa-cloud-arrow-up"></i><span class="hidden sm:inline">Vincular Planilha</span>
-            </button>
             <button onclick="recarregarDados()" class="grad-magalu-blue hover:opacity-95 text-white text-xs font-bold px-4 py-3 rounded-xl shadow-md transition-all flex items-center space-x-2">
-                <i class="fa-solid fa-rotate-right"></i><span>Atualizar</span>
+                <i class="fa-solid fa-rotate-right"></i><span>Forçar Sincronização</span>
             </button>
         </div>
     </header>
 
-    <section class="bg-white border-b border-slate-200 px-6 py-3.5 flex flex-wrap items-center justify-between gap-4 z-20 shadow-sm">
+    <section class="bg-white border-b border-slate-200 px-6 py-3.5 flex flex-wrap items-center justify-between gap-4 z-20 shadow-sm sticky top-0">
         <div class="flex bg-slate-100 p-1.5 rounded-xl gap-1">
             <button onclick="switchTab('tab1')" id="btn-tab1" class="px-4 py-2 text-xs font-black rounded-lg transition-all text-slate-800 bg-white shadow-sm">
-                <i class="fa-solid fa-chart-pie mr-1.5 text-blue-500"></i>1. Visão Geral Executiva
+                <i class="fa-solid fa-chart-pie mr-1.5 text-[#0086FF]"></i>1. Visão Executiva
             </button>
             <button onclick="switchTab('tab2')" id="btn-tab2" class="px-4 py-2 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800">
-                <i class="fa-solid fa-microphone-lines mr-1.5 text-pink-500"></i>2. Performance de Episódios
+                <i class="fa-solid fa-microphone-lines mr-1.5 text-[#FF37A8]"></i>2. Perf. Episódios
             </button>
             <button onclick="switchTab('tab3')" id="btn-tab3" class="px-4 py-2 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800">
-                <i class="fa-solid fa-users mr-1.5 text-purple-500"></i>3. Performance de Hosts
+                <i class="fa-solid fa-users mr-1.5 text-[#A400E1]"></i>3. Perf. Hosts
             </button>
         </div>
 
@@ -96,127 +93,127 @@
             </div>
 
             <div class="flex bg-slate-50 p-1 rounded-xl border border-slate-200 gap-1">
-                <button onclick="setPeriodPreset('all')" class="px-2.5 py-1 text-[10px] font-extrabold uppercase rounded-lg text-slate-600 bg-white shadow-sm transition-all" id="preset-all">Histórico</button>
-                <button onclick="setPeriodPreset('2026')" class="px-2.5 py-1 text-[10px] font-extrabold uppercase rounded-lg text-slate-500 hover:bg-white/50 transition-all" id="preset-2026">Ano 2026</button>
+                <button onclick="setPeriodPreset('all')" class="px-2.5 py-1 text-[10px] font-extrabold uppercase rounded-lg text-slate-600 bg-white shadow-sm transition-all" id="preset-all">Tudo</button>
+                <button onclick="setPeriodPreset('2026')" class="px-2.5 py-1 text-[10px] font-extrabold uppercase rounded-lg text-slate-500 hover:bg-white/50 transition-all" id="preset-2026">2026</button>
+                <button onclick="setPeriodPreset('90d')" class="px-2.5 py-1 text-[10px] font-extrabold uppercase rounded-lg text-slate-500 hover:bg-white/50 transition-all" id="preset-90d">90 dias</button>
                 <button onclick="setPeriodPreset('30d')" class="px-2.5 py-1 text-[10px] font-extrabold uppercase rounded-lg text-slate-500 hover:bg-white/50 transition-all" id="preset-30d">30 dias</button>
-                <button onclick="setPeriodPreset('7d')" class="px-2.5 py-1 text-[10px] font-extrabold uppercase rounded-lg text-slate-500 hover:bg-white/50 transition-all" id="preset-7d">7 dias</button>
             </div>
         </div>
     </section>
 
-    <main class="flex-grow p-6 overflow-y-auto max-w-[1500px] w-full mx-auto">
+    <main class="flex-grow p-6 overflow-y-auto max-w-[1600px] w-full mx-auto">
         
         <!-- ABA 1: VISÃO GERAL EXECUTIVA -->
         <div id="tab1" class="space-y-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <div class="google-card scorecard-blue p-5 flex items-center justify-between">
                     <div>
-                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Total de Downloads / Streams</p>
-                        <h3 id="kpiStreams" class="text-3.5xl font-black text-slate-900 mt-1">---</h3>
-                        <p class="text-xs text-blue-600 font-bold mt-1.5 flex items-center gap-1"><i class="fa-solid fa-arrows-up-down"></i><span>Período Filtrado</span></p>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Total de Streams</p>
+                        <h3 id="kpiStreams" class="text-3xl font-black text-slate-900 mt-1">0</h3>
+                        <p class="text-xs text-[#0086FF] font-bold mt-1.5 flex items-center gap-1"><i class="fa-solid fa-arrows-up-down"></i><span>No período filtrado</span></p>
                     </div>
                     <div class="w-12 h-12 rounded-2xl grad-magalu-blue text-white flex items-center justify-center shadow-lg"><i class="fa-solid fa-circle-play text-xl"></i></div>
                 </div>
 
                 <div class="google-card scorecard-purple p-5 flex items-center justify-between">
                     <div>
-                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Tempo Total de Consumo</p>
-                        <h3 id="kpiHoras" class="text-3.5xl font-black text-slate-900 mt-1">---</h3>
-                        <p class="text-xs text-purple-600 font-bold mt-1.5 flex items-center gap-1"><i class="fa-solid fa-clock"></i><span>Horas</span></p>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Tempo Consumido (Horas)</p>
+                        <h3 id="kpiHoras" class="text-3xl font-black text-slate-900 mt-1">0</h3>
+                        <p class="text-xs text-[#A400E1] font-bold mt-1.5 flex items-center gap-1"><i class="fa-solid fa-clock"></i><span>Tempo bruto gerado</span></p>
                     </div>
                     <div class="w-12 h-12 rounded-2xl grad-magalu-purple text-white flex items-center justify-center shadow-lg"><i class="fa-solid fa-hourglass-half text-xl"></i></div>
                 </div>
 
                 <div class="google-card scorecard-orange p-5 flex items-center justify-between">
                     <div>
-                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Seguidores Spotify</p>
-                        <h3 id="kpiSeguidores" class="text-3.5xl font-black text-slate-900 mt-1">---</h3>
-                        <p class="text-xs text-orange-600 font-bold mt-1.5 flex items-center gap-1"><i class="fa-solid fa-user-plus"></i><span>Acumulado</span></p>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Seguidores Acumulados</p>
+                        <h3 id="kpiSeguidores" class="text-3xl font-black text-slate-900 mt-1">0</h3>
+                        <p class="text-xs text-[#FF8A00] font-bold mt-1.5 flex items-center gap-1"><i class="fa-solid fa-users"></i><span>Base total Spotify</span></p>
                     </div>
-                    <div class="w-12 h-12 rounded-2xl grad-magalu-orange text-white flex items-center justify-center shadow-lg"><i class="fa-solid fa-users text-xl"></i></div>
+                    <div class="w-12 h-12 rounded-2xl grad-magalu-orange text-white flex items-center justify-center shadow-lg"><i class="fa-solid fa-user-plus text-xl"></i></div>
                 </div>
 
                 <div class="google-card scorecard-pink p-5 flex items-center justify-between">
                     <div>
                         <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Média de Finalização</p>
-                        <h3 id="kpiFinalizacao" class="text-3.5xl font-black text-slate-900 mt-1">---</h3>
-                        <p class="text-xs text-pink-600 font-bold mt-1.5 flex items-center gap-1"><i class="fa-solid fa-percent"></i><span>Retenção Geral</span></p>
+                        <h3 id="kpiFinalizacao" class="text-3xl font-black text-slate-900 mt-1">0%</h3>
+                        <p class="text-xs text-[#FF37A8] font-bold mt-1.5 flex items-center gap-1"><i class="fa-solid fa-flag-checkered"></i><span>Eps lançados no período</span></p>
                     </div>
-                    <div class="w-12 h-12 rounded-2xl grad-magalu-pink text-white flex items-center justify-center shadow-lg"><i class="fa-solid fa-flag-checkered text-xl"></i></div>
+                    <div class="w-12 h-12 rounded-2xl grad-magalu-pink text-white flex items-center justify-center shadow-lg"><i class="fa-solid fa-headphones text-xl"></i></div>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="google-card p-6 lg:col-span-2 flex flex-col h-[400px]">
+                <div class="google-card p-6 lg:col-span-2 flex flex-col h-[420px]">
                     <div class="flex items-center justify-between mb-4">
-                        <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2"><i class="fa-solid fa-chart-area text-[#0086FF]"></i><span>Histórico Temporal de Engajamento</span></h4>
-                        <span class="text-[10px] bg-blue-50 text-blue-600 font-black px-2.5 py-1 rounded">Visualização Dinâmica</span>
+                        <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2"><i class="fa-solid fa-chart-area text-[#0086FF]"></i><span>Histórico Temporal de Streams e Engajamento</span></h4>
                     </div>
                     <div class="flex-grow relative"><canvas id="streamsTimelineChart"></canvas></div>
                 </div>
 
-                <div class="google-card p-6 flex flex-col h-[400px]">
+                <div class="google-card p-6 flex flex-col h-[420px]">
                     <div class="flex items-center justify-between mb-4">
                         <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2"><i class="fa-solid fa-chart-pie text-[#C739FF]"></i><span>Mix de Ouvintes</span></h4>
                     </div>
                     <div class="flex-grow relative flex flex-col justify-center items-center">
-                        <div class="w-48 h-48 relative"><canvas id="audienceMixChart"></canvas></div>
+                        <div class="w-56 h-56 relative"><canvas id="audienceMixChart"></canvas></div>
                         <div class="mt-4 text-center">
-                            <p class="text-3xl font-black text-transparent bg-clip-text grad-magalu-purple" id="donutRecurrentPercent">---</p>
-                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Taxa de Fidelidade (Recorrentes)</p>
+                            <p class="text-3xl font-black text-transparent bg-clip-text grad-magalu-purple" id="donutRecurrentPercent">0%</p>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Taxa de Fidelidade (Ouvintes Recorrentes)</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="google-card p-6 lg:col-span-2 bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200">
+                <div class="google-card p-6 lg:col-span-2 bg-gradient-to-br from-slate-50 to-white border border-slate-200">
                     <div class="flex items-center gap-3 border-b border-slate-200 pb-3 mb-4">
-                        <div class="w-10 h-10 rounded-xl grad-magalu-purple flex items-center justify-center text-white shadow-md"><i class="fa-solid fa-brain text-lg"></i></div>
+                        <div class="w-10 h-10 rounded-xl grad-magalu-blue flex items-center justify-center text-white shadow-md"><i class="fa-solid fa-robot text-lg"></i></div>
                         <div>
-                            <h4 class="font-black text-slate-900 text-sm">Insight Hub: Análise Baseada em Dados</h4>
-                            <p class="text-[10px] text-slate-400 uppercase tracking-wider font-bold">Diagnóstico em tempo real</p>
+                            <h4 class="font-black text-slate-900 text-sm">Hub de Inteligência: Diagnóstico do Período</h4>
+                            <p class="text-[10px] text-slate-400 uppercase tracking-wider font-bold">Análise em tempo real do recorte filtrado</p>
                         </div>
                     </div>
-                    <div class="space-y-3">
-                        <div id="aiSummaryLoading" class="hidden space-y-2"><div class="h-4 w-3/4 skeleton rounded"></div><div class="h-4 w-full skeleton rounded"></div></div>
-                        <div id="aiSummaryText" class="text-sm text-slate-600 leading-relaxed font-medium">Os dados estão sendo sincronizados para que a análise algorítmica seja gerada.</div>
+                    <div class="space-y-3 min-h-[120px]">
+                        <div id="aiSummaryLoading" class="hidden space-y-2"><div class="h-4 w-3/4 skeleton rounded"></div><div class="h-4 w-full skeleton rounded"></div><div class="h-4 w-5/6 skeleton rounded"></div></div>
+                        <div id="aiSummaryText" class="text-sm text-slate-700 leading-relaxed font-medium">Os dados estão sendo analisados para gerar os insights executivos.</div>
                     </div>
                 </div>
 
                 <div class="google-card p-6 bg-white border border-slate-200">
-                    <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2 mb-4"><i class="fa-solid fa-lightbulb text-amber-500"></i><span>Sugestões Táticas</span></h4>
+                    <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2 mb-4"><i class="fa-solid fa-lightbulb text-amber-500"></i><span>Sugestões Táticas Geradas</span></h4>
                     <div class="space-y-4" id="aiRecommendationsContainer">
-                        <!-- Gerado via Javascript a partir dos filtros -->
+                        <!-- Preenchido via Javascript baseado nos piores/melhores eps do filtro -->
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- ABA 2: PERFORMANCE DE EPISÓDIOS -->
         <div id="tab2" class="space-y-6 hidden">
-            <div class="google-card p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white sticky top-0 z-10 shadow-sm border-b border-slate-200">
-                <div class="relative flex-grow max-w-md">
+            <div class="google-card p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white sticky top-16 z-10 shadow-sm border-b border-slate-200">
+                <div class="relative flex-grow max-w-lg">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3"><i class="fa-solid fa-magnifying-glass text-slate-400"></i></span>
-                    <input type="text" id="episodeSearchInput" onkeyup="filterEpisodesTable()" placeholder="Buscar episódio pelo título..." class="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0086FF] focus:border-[#0086FF]">
+                    <input type="text" id="episodeSearchInput" onkeyup="filterEpisodesTable()" placeholder="Buscar episódio pelo título (ex: IA, Carreira, Nuvem)..." class="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0086FF] focus:border-[#0086FF]">
                 </div>
                 <div class="flex items-center space-x-3 text-xs font-bold text-slate-400 uppercase tracking-wider">
-                    <span>Episódios encontrados: <span id="visibleEpisodeCount" class="text-[#0086FF] font-extrabold text-sm">0</span></span>
+                    <span>Lançamentos no período: <span id="visibleEpisodeCount" class="text-[#FF37A8] font-extrabold text-sm">0</span></span>
                 </div>
             </div>
 
             <div class="google-card p-6">
                 <div class="flex items-center justify-between mb-4">
-                    <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2"><i class="fa-solid fa-list text-[#0086FF]"></i><span>Ranking Completo de Episódios</span></h4>
+                    <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2"><i class="fa-solid fa-list text-[#FF37A8]"></i><span>Tabela Consolidada de Lançamentos</span></h4>
                 </div>
                 <div class="overflow-x-auto rounded-xl border border-slate-150">
                     <table class="min-w-full divide-y divide-slate-200">
                         <thead class="bg-slate-50">
                             <tr>
-                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Título do Episódio</th>
-                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Data de Publicação</th>
-                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Estreia (7d)</th>
-                                <th class="px-6 py-4 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Plays Acumulados</th>
-                                <th class="px-6 py-4 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Taxa Finalização</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-400 uppercase tracking-wider cursor-pointer hover:text-slate-600">Título do Episódio (No Filtro)</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Data de Pub.</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Status 7d</th>
+                                <th class="px-6 py-4 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Plays (Lançamento)</th>
+                                <th class="px-6 py-4 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Retenção Fim</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-slate-100" id="episodesTableBody"></tbody>
@@ -225,27 +222,28 @@
             </div>
         </div>
 
+        <!-- ABA 3: PERFORMANCE DE HOSTS -->
         <div id="tab3" class="space-y-6 hidden">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div class="google-card p-6 lg:col-span-2 flex flex-col h-[400px]">
                     <div class="flex items-center justify-between mb-4">
-                        <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2"><i class="fa-solid fa-chart-bar text-[#A400E1]"></i><span>Correlação Apresentador vs Alcance</span></h4>
+                        <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2"><i class="fa-solid fa-microphone-lines text-[#A400E1]"></i><span>Correlação de Alcance por Apresentador</span></h4>
                     </div>
                     <div class="flex-grow relative"><canvas id="hostsPerformanceChart"></canvas></div>
                 </div>
 
-                <div class="google-card p-6 flex flex-col h-[400px] bg-slate-50 border border-slate-200">
-                    <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2 mb-4"><i class="fa-solid fa-trophy text-[#FF8A00]"></i><span>Destaques da Equipe</span></h4>
+                <div class="google-card p-6 flex flex-col justify-center bg-slate-50 border border-slate-200">
+                    <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2 mb-6"><i class="fa-solid fa-trophy text-[#FF8A00]"></i><span>Destaques da Equipe (No Período)</span></h4>
                     <div class="space-y-6">
                         <div>
-                            <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Maior Geração de Audiência</span>
+                            <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Maior Geração de Plays</span>
                             <h5 class="text-xl font-black text-slate-900 mt-1" id="starHostAudience">---</h5>
-                            <p class="text-xs text-[#0086FF] font-medium mt-1">Liderando em plays acumulados.</p>
+                            <p class="text-xs text-[#0086FF] font-medium mt-1">Liderando o volume de acessos na estreia.</p>
                         </div>
-                        <div>
-                            <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Máxima Retenção Geral</span>
+                        <div class="border-t border-slate-200 pt-4">
+                            <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Máxima Retenção Média</span>
                             <h5 class="text-xl font-black text-slate-900 mt-1" id="starHostRetention">---</h5>
-                            <p class="text-xs text-[#FF37A8] font-medium mt-1">Gera discussões e roteiros magnéticos.</p>
+                            <p class="text-xs text-[#FF37A8] font-medium mt-1">Gera maior taxa de escuta até o final.</p>
                         </div>
                     </div>
                 </div>
@@ -253,15 +251,15 @@
 
             <div class="google-card p-6">
                 <div class="flex items-center justify-between mb-4">
-                    <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2"><i class="fa-solid fa-users text-[#C739FF]"></i><span>Leaderboard Analítico de Co-Hosts</span></h4>
+                    <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2"><i class="fa-solid fa-users text-[#C739FF]"></i><span>Leaderboard Analítico (Hosts/Co-Hosts)</span></h4>
                 </div>
                 <div class="overflow-x-auto rounded-xl border border-slate-150">
                     <table class="min-w-full divide-y divide-slate-200">
                         <thead class="bg-slate-50">
                             <tr>
-                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Apresentador(a) / Host</th>
-                                <th class="px-6 py-4 text-center text-xs font-bold text-slate-400 uppercase tracking-wider">Participações (Eps)</th>
-                                <th class="px-6 py-4 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Plays Gerados (Lançamento)</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Apresentador(a) / Convidado</th>
+                                <th class="px-6 py-4 text-center text-xs font-bold text-slate-400 uppercase tracking-wider">Episódios Gravados</th>
+                                <th class="px-6 py-4 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Plays Acumulados (Lançamentos)</th>
                                 <th class="px-6 py-4 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Média de Conclusão (%)</th>
                             </tr>
                         </thead>
@@ -276,65 +274,143 @@
     <script>
         const SPREADSHEET_ID = "1vu8PUXZA0Mo28YLDP7Mla_A_CHkU17p3lUYyg2BxAqE";
 
-        let liveDiario = [];
-        let liveEpisodios = [];
+        let fullDiario = [];
+        let fullEpisodios = [];
         let timelineChartObj = null;
         let audienceMixChartObj = null;
         let hostsPerformanceChartObj = null;
 
-        // Controle de Abas
+        // --- SISTEMA DE ABAS ---
         function switchTab(tabId) {
             ["tab1", "tab2", "tab3"].forEach(id => {
                 document.getElementById(id).classList.add("hidden");
                 document.getElementById("btn-" + id).className = "px-4 py-2 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800";
             });
             document.getElementById(tabId).classList.remove("hidden");
-            document.getElementById("btn-" + tabId).className = "px-4 py-2 text-xs font-black rounded-lg transition-all text-slate-800 bg-white shadow-sm";
             
-            setTimeout(() => { if (tabId === 'tab1') aplicarFiltrosDinamicamente(); else if (tabId === 'tab3') renderHostsChartAndTable(); }, 50);
+            let activeClass = "px-4 py-2 text-xs font-black rounded-lg transition-all text-slate-800 bg-white shadow-sm";
+            document.getElementById("btn-" + tabId).className = activeClass;
+            
+            // Recalcula visualizações visíveis
+            setTimeout(() => { 
+                if (tabId === 'tab1') { if(timelineChartObj) timelineChartObj.resize(); if(audienceMixChartObj) audienceMixChartObj.resize(); }
+                if (tabId === 'tab3') { renderHostsChartAndTable(); }
+            }, 50);
         }
 
-        // Fetch dinâmico de planilhas via Google Visualization
+        // --- CONEXÃO COM GOOGLE SHEETS VIA API ---
         async function fetchGoogleSheetsData(abaNome) {
             const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(abaNome)}`;
-            const response = await fetch(url);
-            const text = await response.text();
-            const rawJson = JSON.parse(text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1));
-            return rawJson.table.rows;
+            try {
+                const response = await fetch(url);
+                const text = await response.text();
+                // O Google retorna um JSON enrolado em uma função gviz. Cortamos as bordas para pegar o JSON.
+                const jsonText = text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1);
+                const rawJson = JSON.parse(jsonText);
+                return rawJson.table.rows;
+            } catch (e) {
+                console.error("Falha ao ler a aba: " + abaNome, e);
+                return null;
+            }
         }
 
-        function extrairDataISO(valData) {
-            if (!valData) return "2026-01-01";
-            if (valData.includes("Date")) {
+        // Parse de Datas misturadas (Date(...) ou Text)
+        function extrairData(valData) {
+            if (!valData) return "1970-01-01";
+            if (typeof valData === 'string' && valData.includes("Date(")) {
                 let ms = parseInt(valData.replace(/[^0-9]/g, ''));
-                if (!isNaN(ms)) return new Date(ms).toISOString().substring(0,10);
+                if (!isNaN(ms)) {
+                    let d = new Date(ms);
+                    return d.toISOString().substring(0,10);
+                }
             }
             if (valData.includes("-")) return valData;
+            // Converte DD/MM/YYYY para YYYY-MM-DD
             let parts = valData.split("/");
             if (parts.length === 3) return `${parts[2]}-${parts[1]}-${parts[0]}`;
             return valData;
         }
 
-        // Filtros de Data
-        function setPeriodPreset(preset) {
-            if (liveDiario.length === 0) return;
-            
-            const dates = liveDiario.map(d => d.data).sort();
-            const lastDateObj = new Date(dates[dates.length - 1]);
-            const firstDateObj = new Date(dates[0]);
-            
-            let start = firstDateObj;
-            let end = lastDateObj;
+        function limparNumero(val) {
+            if(val === undefined || val === null) return 0;
+            if(typeof val === 'number') return val;
+            let n = parseFloat(String(val).replace(",", "."));
+            return isNaN(n) ? 0 : n;
+        }
 
-            ["all", "2026", "30d", "7d"].forEach(id => document.getElementById("preset-" + id).className = "px-2.5 py-1 text-[10px] font-extrabold uppercase rounded-lg text-slate-500 hover:bg-white/50 transition-all");
+        // --- MOTOR CENTRAL DE RECARREGAMENTO ---
+        async function recarregarDados() {
+            const statusLabel = document.getElementById('connectionStatus');
+            statusLabel.className = "text-[10px] bg-amber-100 text-amber-700 font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center";
+            statusLabel.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1.5 animate-pulse"></span><span>🔴 Conectando API...</span>`;
+
+            // Tenta pegar da planilha real (API)
+            let rowsDiario = await fetchGoogleSheetsData("Métricas Diárias");
+            let rowsEps = await fetchGoogleSheetsData("Performance_Episódios");
+
+            if (rowsDiario && rowsEps) {
+                // Sucesso na leitura! Formata os dados diários
+                fullDiario = rowsDiario.map(r => {
+                    const c = r.c;
+                    return {
+                        data: c[0] ? extrairData(c[0].v || c[0].f) : "",
+                        streams: c[1] ? limparNumero(c[1].v) : 0,
+                        tempoConsumo: c[2] ? limparNumero(c[2].v) : 0,
+                        seguidores: c[5] ? limparNumero(c[5].v) : 0,
+                        recorrente: c[7] ? limparNumero(c[7].v) : 0,
+                        novidade: c[8] ? limparNumero(c[8].v) : 0
+                    };
+                }).filter(d => d.data !== "");
+
+                // Formata os dados de episódios
+                fullEpisodios = rowsEps.map(r => {
+                    const c = r.c;
+                    return {
+                        titulo: c[0] ? String(c[0].v) : "",
+                        dataPub: c[1] ? extrairData(c[1].f || c[1].v) : "",
+                        desempenho: c[2] ? String(c[2].v) : "N/A",
+                        plays: c[3] ? limparNumero(c[3].v) : 0,
+                        finalizacao: c[4] ? limparNumero(c[4].v) : 0,
+                        hosts: c[6] && c[6].v ? String(c[6].v) : "" // Coluna 7 (index 6) puxada pelo Kanban
+                    };
+                }).filter(e => e.titulo !== "");
+
+                statusLabel.className = "text-[10px] bg-emerald-100 text-emerald-700 font-extrabold px-2.5 py-0.5 rounded-full uppercase flex items-center";
+                statusLabel.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span><span>🟢 Planilha HEAD Sincronizada</span>`;
+            } else {
+                // Falha na API. Vamos simular os dados de 2026 para que o layout não quebre.
+                statusLabel.className = "text-[10px] bg-red-100 text-red-700 font-extrabold px-2.5 py-0.5 rounded-full uppercase flex items-center";
+                statusLabel.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-red-500 mr-1.5"></span><span>⚠️ Leitor Bloqueado (Simulação)</span>`;
+                simularDadosMock();
+            }
+
+            // Ordena o array diário
+            fullDiario.sort((a,b) => new Date(a.data) - new Date(b.data));
+            
+            // Ativa o Preset de filtro para os "Últimos 90 Dias" como padrão para análises úteis
+            setPeriodPreset('90d');
+        }
+
+        // --- FILTROS DE PERÍODO TEMPORAL ---
+        function setPeriodPreset(preset) {
+            if (fullDiario.length === 0) return;
+            
+            const lastDataObj = new Date(fullDiario[fullDiario.length - 1].data);
+            const firstDataObj = new Date(fullDiario[0].data);
+            
+            let start = firstDataObj;
+            let end = lastDataObj;
+
+            ["all", "2026", "90d", "30d"].forEach(id => document.getElementById("preset-" + id).className = "px-2.5 py-1 text-[10px] font-extrabold uppercase rounded-lg text-slate-500 hover:bg-white/50 transition-all");
             document.getElementById("preset-" + preset).className = "px-2.5 py-1 text-[10px] font-extrabold uppercase rounded-lg text-slate-600 bg-white shadow-sm transition-all";
 
-            if (preset === '2026') start = new Date("2026-01-01");
-            if (preset === '30d') { start = new Date(lastDateObj); start.setDate(lastDateObj.getDate() - 30); }
-            if (preset === '7d') { start = new Date(lastDateObj); start.setDate(lastDateObj.getDate() - 7); }
+            if (preset === '2026') { start = new Date("2026-01-01"); end = new Date("2026-12-31"); }
+            if (preset === '90d') { start = new Date(lastDataObj); start.setDate(lastDataObj.getDate() - 90); }
+            if (preset === '30d') { start = new Date(lastDataObj); start.setDate(lastDataObj.getDate() - 30); }
 
             document.getElementById("filterStartDate").value = start.toISOString().substring(0,10);
             document.getElementById("filterEndDate").value = end.toISOString().substring(0,10);
+            
             aplicarFiltrosDinamicamente();
         }
 
@@ -346,66 +422,177 @@
             const startDate = new Date(rawStart);
             const endDate = new Date(rawEnd);
 
-            const diariosFiltrados = liveDiario.filter(r => {
+            // Filtra os arrays mestres
+            const diariosFiltrados = fullDiario.filter(r => {
                 const itemDate = new Date(r.data);
                 return itemDate >= startDate && itemDate <= endDate;
             });
+            
+            const epsFiltrados = fullEpisodios.filter(r => {
+                const itemDate = new Date(r.dataPub);
+                return itemDate >= startDate && itemDate <= endDate;
+            });
 
-            atualizarKPIs(diariosFiltrados, liveEpisodios);
+            atualizarKPIs(diariosFiltrados, epsFiltrados);
             renderTimelineChart(diariosFiltrados);
             renderAudienceMixChart(diariosFiltrados);
-            gerarAnaliseInteligente(diariosFiltrados, liveEpisodios);
+            gerarAnaliseInteligente(diariosFiltrados, epsFiltrados);
+            
+            // Popula a tabela de eps usando os filtrados temporalmente, mas respeitando a barra de busca
+            filterEpisodesTable(epsFiltrados);
+            
+            // A Aba 3 (Hosts) não será filtrada restritamente no primeiro render, mas sim quando for clicada (para manter escopo)
+            if(!document.getElementById("tab3").classList.contains("hidden")) {
+                renderHostsChartAndTable(epsFiltrados);
+            } else {
+                // Guarda o recorte global para quando abrir a aba 3
+                window.globalEpsFiltrados = epsFiltrados; 
+            }
         }
 
         function atualizarKPIs(diarios, episodios) {
+            // Soma os streams do recorte
             const totalStreams = diarios.reduce((acc, r) => acc + (r.streams || 0), 0);
             document.getElementById('kpiStreams').innerText = totalStreams.toLocaleString('pt-BR');
 
+            // Soma as horas brutas
             const totalHoras = diarios.reduce((acc, r) => acc + (r.tempoConsumo || 0), 0);
             document.getElementById('kpiHoras').innerText = Math.round(totalHoras).toLocaleString('pt-BR');
 
+            // Pega o último dia do recorte para seguidores
             const seguidoresList = diarios.map(r => r.seguidores).filter(v => v > 0);
-            const seguidoresTotal = seguidoresList.length > 0 ? seguidoresList[seguidoresList.length - 1] : 0;
+            const seguidoresTotal = seguidoresList.length > 0 ? seguidoresList[seguidoresList.length - 1] : (fullDiario.length > 0 ? fullDiario[fullDiario.length-1].seguidores : 0);
             document.getElementById('kpiSeguidores').innerText = seguidoresTotal.toLocaleString('pt-BR');
 
-            const filteredEps = episodios.filter(e => e.finalizacao > 0);
-            const avgCompleteness = filteredEps.reduce((acc, r) => acc + r.finalizacao, 0) / (filteredEps.length || 1);
+            // Média de retenção dos episódios lançados naquele recorte
+            const epsComRetencao = episodios.filter(e => e.finalizacao > 0);
+            const avgCompleteness = epsComRetencao.length > 0 ? epsComRetencao.reduce((acc, r) => acc + r.finalizacao, 0) / epsComRetencao.length : 0;
             document.getElementById('kpiFinalizacao').innerText = avgCompleteness.toFixed(1) + '%';
         }
 
-        // Gráficos de Renderização (ChartJS)
+        // --- SISTEMA INTELIGENTE DE DIAGNÓSTICO (IA LOCAL) ---
+        function gerarAnaliseInteligente(diarios, episodios) {
+            document.getElementById("aiSummaryLoading").classList.remove("hidden");
+            document.getElementById("aiSummaryText").classList.add("hidden");
+
+            setTimeout(() => {
+                if(diarios.length === 0) {
+                    document.getElementById("aiSummaryText").innerHTML = "Nenhum dado registrado para o período selecionado.";
+                    document.getElementById("aiSummaryLoading").classList.add("hidden");
+                    document.getElementById("aiSummaryText").classList.remove("hidden");
+                    return;
+                }
+
+                const totalStreams = diarios.reduce((acc, r) => acc + (r.streams || 0), 0);
+                const diasNoFiltro = diarios.length;
+                const mediaDiaria = totalStreams / (diasNoFiltro || 1);
+                
+                let totalRec = diarios.reduce((acc, r) => acc + (r.recorrente || 0), 0);
+                let totalTotal = diarios.reduce((acc, r) => acc + (r.recorrente + r.novidade || 0), 0);
+                let pctFidelidade = totalTotal > 0 ? (totalRec / totalTotal) * 100 : 0;
+
+                // DIAGNÓSTICO DE TEXTO DINÂMICO
+                let diag = `Durante o recorte selecionado (${diasNoFiltro} dias registrados), o canal gerou <strong>${totalStreams.toLocaleString('pt-BR')} plays diretos</strong>. `;
+                
+                if (mediaDiaria > 150) {
+                    diag += `A tração orgânica encontra-se <strong>aquecida</strong>, indicando forte engajamento da base instalada. `;
+                } else {
+                    diag += `O tráfego apresenta volumes estabilizados. Investimentos em push notifications e comunicação interna acelerariam novas captações. `;
+                }
+
+                if (pctFidelidade > 60) {
+                    diag += `Com <strong>${pctFidelidade.toFixed(1)}% de ouvintes recorrentes</strong>, a força do podcast hoje é a lealdade do seu ecossistema.`;
+                } else if (pctFidelidade > 0) {
+                    diag += `Observamos um volume interessante de descobrimentos, indicando captação de <strong>novas bolhas de ouvintes</strong> no período.`;
+                }
+
+                document.getElementById("aiSummaryText").innerHTML = diag;
+                document.getElementById("aiSummaryLoading").classList.add("hidden");
+                document.getElementById("aiSummaryText").classList.remove("hidden");
+
+                // SUGESTÕES TÁTICAS (Cruza os piores/melhores episódios do recorte)
+                let recomendacoes = "";
+                if(episodios.length > 0) {
+                    // Ordena episódios lançados no período por retenção
+                    let epsOrd = [...episodios].filter(e => e.finalizacao > 0).sort((a,b) => b.finalizacao - a.finalizacao);
+                    
+                    if(epsOrd.length >= 2) {
+                        let melhorEp = epsOrd[0];
+                        let piorEp = epsOrd[epsOrd.length - 1];
+                        
+                        recomendacoes += `<div class="flex gap-2 items-start"><span class="w-1.5 h-1.5 rounded-full bg-[#0086FF] mt-1.5"></span><p class="text-xs text-slate-600"><strong>Padrão de Sucesso:</strong> O roteiro do episódio "<i>${melhorEp.titulo}</i>" segurou ${melhorEp.finalizacao}% da base até o final. Recomendamos dissecar este formato e replicar a dinâmica nos próximos quadros técnicos.</p></div>`;
+                        
+                        if(piorEp.finalizacao < 30) {
+                             recomendacoes += `<div class="flex gap-2 items-start"><span class="w-1.5 h-1.5 rounded-full bg-[#FF8A00] mt-1.5"></span><p class="text-xs text-slate-600"><strong>Ponto de Atenção:</strong> "<i>${piorEp.titulo}</i>" reteve apenas ${piorEp.finalizacao}%. Para temas similares, considere encurtar o tempo de duração ou mudar para um formato de "Papo de Café" focado em pílulas rápidas.</p></div>`;
+                        } else {
+                             recomendacoes += `<div class="flex gap-2 items-start"><span class="w-1.5 h-1.5 rounded-full bg-[#00D604] mt-1.5"></span><p class="text-xs text-slate-600"><strong>Saúde Geral:</strong> Nenhum episódio do recorte despencou no índice de rejeição grave. A produção está equalizada.</p></div>`;
+                        }
+                    } else {
+                         recomendacoes += `<div class="flex gap-2 items-start"><span class="w-1.5 h-1.5 rounded-full bg-[#A400E1] mt-1.5"></span><p class="text-xs text-slate-600">Não há amostra de lançamentos suficiente no recorte exato para gerar testes de roteiro (A/B). Amplie o período para sugerirmos pautas.</p></div>`;
+                    }
+                } else {
+                    recomendacoes += `<div class="flex gap-2 items-start"><span class="w-1.5 h-1.5 rounded-full bg-slate-400 mt-1.5"></span><p class="text-xs text-slate-600">Sem lançamentos recentes no filtro selecionado para análise de pauta.</p></div>`;
+                }
+                document.getElementById("aiRecommendationsContainer").innerHTML = recomendacoes;
+
+            }, 400); // Mock delay for realism
+        }
+
+
+        // --- RENDERS DE GRÁFICOS (CHART.JS) ---
         function renderTimelineChart(diarios) {
             const ctx = document.getElementById('streamsTimelineChart').getContext('2d');
             if (timelineChartObj) timelineChartObj.destroy();
 
-            const blueGrad = ctx.createLinearGradient(0, 0, 0, 300);
-            blueGrad.addColorStop(0, 'rgba(0, 134, 255, 0.45)');
+            // Degradê Magalu Blue para o preenchimento
+            const blueGrad = ctx.createLinearGradient(0, 0, 0, 400);
+            blueGrad.addColorStop(0, 'rgba(0, 134, 255, 0.3)');
             blueGrad.addColorStop(1, 'rgba(0, 134, 255, 0)');
 
-            const groupedByMonth = {};
+            // Agrupamento temporal inteligente (semanal ou mensal dependendo da janela)
+            const grouped = {};
+            let isLongWindow = diarios.length > 90;
+
             diarios.forEach(d => {
-                const mesAno = d.data.substring(0, 7); // Agrupamento por YYYY-MM fica mais fluido
-                if(!groupedByMonth[mesAno]) groupedByMonth[mesAno] = {streams: 0, horas: 0};
-                groupedByMonth[mesAno].streams += d.streams;
-                groupedByMonth[mesAno].horas += d.tempoConsumo;
+                let dObj = new Date(d.data);
+                let key;
+                if(isLongWindow) {
+                    key = dObj.getFullYear() + "-" + ('0' + (dObj.getMonth()+1)).slice(-2); // YYYY-MM
+                } else {
+                    // Semanal: YYYY-MM-Semana (Aproximada usando o dia)
+                    let w = Math.ceil(dObj.getDate() / 7);
+                    key = dObj.getFullYear() + "-" + ('0' + (dObj.getMonth()+1)).slice(-2) + "-W" + w;
+                }
+                
+                if(!grouped[key]) grouped[key] = { streams: 0, horas: 0 };
+                grouped[key].streams += d.streams;
+                grouped[key].horas += d.tempoConsumo;
             });
 
-            const labels = Object.keys(groupedByMonth).sort();
-            const streams = labels.map(l => groupedByMonth[l].streams);
+            const labels = Object.keys(grouped).sort();
+            const streams = labels.map(l => grouped[l].streams);
 
             timelineChartObj = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Streams Mensais/Semanais',
+                        label: 'Plays Executados',
                         data: streams,
                         borderColor: '#0086FF',
                         backgroundColor: blueGrad,
-                        fill: true, tension: 0.4, borderWidth: 3
+                        fill: true, tension: 0.35, borderWidth: 3, pointRadius: 2, pointHoverRadius: 6
                     }]
                 },
-                options: { responsive: true, maintainAspectRatio: false, scales: { x: { grid: { display: false } }, y: { beginAtZero: true } } }
+                options: { 
+                    responsive: true, maintainAspectRatio: false, 
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: { legend: { display: false } },
+                    scales: { 
+                        x: { grid: { display: false }, ticks: { font: { size: 9, family: 'Inter' } } }, 
+                        y: { beginAtZero: true, border: { dash: [4, 4] }, grid: { color: '#f1f5f9' }, ticks: { font: { size: 10, family: 'Inter' } } } 
+                    } 
+                }
             });
         }
 
@@ -423,164 +610,178 @@
             audienceMixChartObj = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Ouvintes Fiéis', 'Descobertas Novas'],
-                    datasets: [{ data: [recP, 100 - recP], backgroundColor: ['#A400E1', '#2ECEFF'], borderWidth: 0 }]
+                    labels: ['Ouvintes Recorrentes', 'Novidades no Período'],
+                    datasets: [{ 
+                        data: [recP, 100 - recP], 
+                        backgroundColor: ['#A400E1', '#0086FF'], // Cores sólidas Magalu (Roxo e Azul)
+                        hoverOffset: 4, borderWidth: 0
+                    }]
                 },
-                options: { responsive: true, maintainAspectRatio: false, cutout: '78%', plugins: { legend: { display: false } } }
+                options: { 
+                    responsive: true, maintainAspectRatio: false, cutout: '75%', 
+                    plugins: { legend: { display: false }, tooltip: { bodyFont: { family: 'Inter' } } } 
+                }
             });
         }
 
-        // Feature Nova: Insight Hub Inteligente
-        function gerarAnaliseInteligente(diarios, episodios) {
-            document.getElementById("aiSummaryLoading").classList.remove("hidden");
-            document.getElementById("aiSummaryText").classList.add("hidden");
-
-            setTimeout(() => {
-                const totalStreams = diarios.reduce((acc, r) => acc + (r.streams || 0), 0);
-                const hrs = diarios.reduce((acc, r) => acc + (r.tempoConsumo || 0), 0);
-                
-                let diag = `Durante o recorte selecionado, o <strong>Cabeça de Lab</strong> processou mais de <strong>${totalStreams.toLocaleString()} streams validados</strong>, gerando cerca de <strong>${Math.round(hrs)} horas</strong> de engajamento técnico direto. `;
-                
-                if (totalStreams > 5000) diag += `A conversão da base está em alta, o que valida a distribuição dos conteúdos em canais oficiais internos e externos. `;
-                else diag += `O período reflete estabilidade. Investimentos em tráfego de awareness para os episódios de carreira poderiam acelerar a aquisição de novos assinantes. `;
-
-                document.getElementById("aiSummaryText").innerHTML = diag;
-                document.getElementById("aiSummaryLoading").classList.add("hidden");
-                document.getElementById("aiSummaryText").classList.remove("hidden");
-
-                // Sugestões
-                document.getElementById("aiRecommendationsContainer").innerHTML = `
-                    <div class="flex gap-2 items-start"><span class="w-1.5 h-1.5 rounded-full bg-[#0086FF] mt-1.5"></span><p class="text-xs text-slate-600">Replicar o modelo de Roteiro do "Papo de Café", que segurou 50% de retenção na média anual.</p></div>
-                    <div class="flex gap-2 items-start"><span class="w-1.5 h-1.5 rounded-full bg-[#FF37A8] mt-1.5"></span><p class="text-xs text-slate-600">Promover cruzamento técnico entre Back-End e Data (temas que estouram os acessos na 1ª semana).</p></div>
-                `;
-            }, 500);
-        }
-
-        // Tabelas de Performance
-        function populateDetailedTable(data) {
+        // --- RENDER ABA 2: LISTAGEM E PESQUISA ---
+        function filterEpisodesTable(baseArray = window.globalEpsFiltrados || fullEpisodios) {
+            const query = document.getElementById('episodeSearchInput').value.toLowerCase();
+            
+            // Filtra o array mestre que recebemos (já cortado por data) pela palavra chave
+            const filtered = baseArray.filter(ep => ep.titulo.toLowerCase().includes(query)).sort((a,b) => new Date(b.dataPub) - new Date(a.dataPub));
+            
             const tableBody = document.getElementById('episodesTableBody');
             tableBody.innerHTML = '';
-            data.forEach(ep => {
+            
+            filtered.forEach(ep => {
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-slate-50 transition-colors';
                 
-                let badgeClass = 'bg-slate-100 text-slate-800';
-                if (ep.desempenho.includes('acima')) badgeClass = 'bg-emerald-50 text-[#00D604]';
-                else if (ep.desempenho.includes('abaixo')) badgeClass = 'bg-orange-50 text-[#FF8A00]';
+                let badgeClass = 'bg-slate-100 text-slate-500';
+                let st = ep.desempenho.toLowerCase();
+                if (st.includes('acima')) badgeClass = 'bg-emerald-50 text-[#00D604] border border-[#00D604]/20';
+                else if (st.includes('abaixo')) badgeClass = 'bg-orange-50 text-[#FF8A00] border border-[#FF8A00]/20';
+
+                // Highlight condicional para o azul/rosa
+                let finClass = ep.finalizacao > 45 ? 'text-[#0086FF]' : (ep.finalizacao < 30 ? 'text-[#FF8A00]' : 'text-slate-900');
 
                 tr.innerHTML = `
-                    <td class="px-6 py-4 text-sm font-bold text-slate-900 truncate max-w-sm">${ep.titulo}</td>
-                    <td class="px-6 py-4 text-sm text-slate-500">${ep.data}</td>
-                    <td class="px-6 py-4 text-sm"><span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase ${badgeClass}">${ep.desempenho}</span></td>
-                    <td class="px-6 py-4 text-sm font-black text-slate-900 text-right">${ep.plays.toLocaleString()}</td>
-                    <td class="px-6 py-4 text-sm font-black text-[#0086FF] text-right">${ep.finalizacao > 0 ? ep.finalizacao.toFixed(1) + '%' : 'N/A'}</td>
+                    <td class="px-6 py-4 text-sm font-bold text-slate-900 truncate max-w-sm" title="${ep.titulo}">${ep.titulo}</td>
+                    <td class="px-6 py-4 text-sm text-slate-500">${ep.dataPub}</td>
+                    <td class="px-6 py-4 text-sm"><span class="text-[10px] font-extrabold px-2 py-0.5 rounded uppercase ${badgeClass}">${ep.desempenho}</span></td>
+                    <td class="px-6 py-4 text-sm font-black text-slate-900 text-right">${ep.plays.toLocaleString('pt-BR')}</td>
+                    <td class="px-6 py-4 text-sm font-black text-right ${finClass}">${ep.finalizacao > 0 ? ep.finalizacao.toFixed(1) + '%' : 'N/A'}</td>
                 `;
                 tableBody.appendChild(tr);
             });
-            document.getElementById('visibleEpisodeCount').innerText = data.length;
+            document.getElementById('visibleEpisodeCount').innerText = filtered.length;
         }
 
-        function filterEpisodesTable() {
-            const query = document.getElementById('episodeSearchInput').value.toLowerCase();
-            const filtered = liveEpisodios.filter(ep => ep.titulo.toLowerCase().includes(query));
-            populateDetailedTable(filtered);
-        }
-
-        // Host Mapping & Charting
-        function renderHostsChartAndTable() {
+        // --- RENDER ABA 3: MACHINE LEARNING SIMPLES / PERFORMANCE DE HOSTS ---
+        function renderHostsChartAndTable(baseArray = window.globalEpsFiltrados || fullEpisodios) {
             let hostsPerformance = {};
-            liveEpisodios.forEach(ep => {
-                let hostList = ep.hosts && ep.hosts.trim() !== "" ? ep.hosts.split(",").map(h => h.trim()) : inferHostsFromTitle(ep.titulo);
+            
+            baseArray.forEach(ep => {
+                // Se o Apps Script via Kanbanforce achou os nomes (Coluna G), usa. Se não, tenta deduzir pelo título.
+                let hostList = (ep.hosts && ep.hosts.trim() !== "" && !ep.hosts.includes("spotify:")) 
+                                ? ep.hosts.split(",").map(h => h.trim()) 
+                                : inferHostsFromTitle(ep.titulo);
+                
                 hostList.forEach(host => {
-                    if(!hostsPerformance[host]) hostsPerformance[host] = { nome: host, count: 0, plays: 0, finTotal: 0, finCount: 0 };
-                    hostsPerformance[host].count += 1;
-                    hostsPerformance[host].plays += ep.plays;
+                    let hName = host.toUpperCase();
+                    if(hName.length < 3) return; // Ignora sujeiras
+
+                    if(!hostsPerformance[hName]) hostsPerformance[hName] = { nome: host, count: 0, plays: 0, finTotal: 0, finCount: 0 };
+                    
+                    hostsPerformance[hName].count += 1;
+                    hostsPerformance[hName].plays += ep.plays;
                     if(ep.finalizacao > 0) {
-                        hostsPerformance[host].finTotal += ep.finalizacao;
-                        hostsPerformance[host].finCount += 1;
+                        hostsPerformance[hName].finTotal += ep.finalizacao;
+                        hostsPerformance[hName].finCount += 1;
                     }
                 });
             });
 
+            // Converte o objeto em array e filtra Hosts vazios
             let listHosts = Object.values(hostsPerformance).map(h => {
                 return { nome: h.nome, episodes: h.count, plays: h.plays, retention: h.finCount > 0 ? (h.finTotal / h.finCount) : 0 };
-            }).filter(h => h.nome !== "" && !h.nome.includes("spotify")).sort((a,b) => b.plays - a.plays).slice(0, 8); // Top 8
+            }).sort((a,b) => b.plays - a.plays).slice(0, 10); // Top 10 Hosts
 
+            // Preenche os Destaques
             if(listHosts.length > 0) {
-                document.getElementById('starHostAudience').innerText = listHosts[0].nome;
-                let topRet = [...listHosts].sort((a,b) => b.retention - a.retention);
+                document.getElementById('starHostAudience').innerText = listHosts[0].nome + ` (${listHosts[0].plays.toLocaleString()} plays)`;
+                
+                // Melhor retenção entre os que fizeram mais de 1 episódio no período (evitar ponto fora da curva)
+                let validRet = listHosts.filter(h => h.episodes > 1);
+                if(validRet.length === 0) validRet = listHosts;
+                let topRet = [...validRet].sort((a,b) => b.retention - a.retention);
+                
                 document.getElementById('starHostRetention').innerText = topRet[0].nome + ` (${topRet[0].retention.toFixed(1)}%)`;
+            } else {
+                document.getElementById('starHostAudience').innerText = "Dados insuficientes";
+                document.getElementById('starHostRetention').innerText = "Dados insuficientes";
             }
 
+            // Renderiza o Gráfico de Barras Horizontal
             const ctx = document.getElementById('hostsPerformanceChart').getContext('2d');
             if(hostsPerformanceChartObj) hostsPerformanceChartObj.destroy();
+            
+            // Degradê Roxo Magalu para as barras
+            const purpGrad = ctx.createLinearGradient(0, 0, 400, 0);
+            purpGrad.addColorStop(0, '#A400E1');
+            purpGrad.addColorStop(1, '#C739FF');
+
             hostsPerformanceChartObj = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: listHosts.map(h => h.nome),
-                    datasets: [{ label: 'Plays Acumulados', data: listHosts.map(h => h.plays), backgroundColor: 'rgba(164, 0, 225, 0.85)' }]
+                    datasets: [{ 
+                        label: 'Plays Gerados', 
+                        data: listHosts.map(h => h.plays), 
+                        backgroundColor: purpGrad,
+                        borderRadius: 4
+                    }]
                 },
-                options: { responsive: true, maintainAspectRatio: false }
+                options: { 
+                    responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { color: '#f1f5f9' }, ticks: { font: { family: 'Inter', size: 10 } } },
+                        y: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 10, weight: 'bold' } } }
+                    }
+                }
             });
 
+            // Renderiza a Tabela
             const tBody = document.getElementById('hostsTableBody');
             tBody.innerHTML = '';
             listHosts.forEach(h => {
                 const tr = document.createElement('tr');
-                tr.innerHTML = `<td class="px-6 py-4 text-sm font-bold">${h.nome}</td><td class="px-6 py-4 text-center text-sm">${h.episodes}</td><td class="px-6 py-4 text-right font-black">${h.plays.toLocaleString()}</td><td class="px-6 py-4 text-right font-black text-[#A400E1]">${h.retention.toFixed(1)}%</td>`;
+                tr.className = 'hover:bg-slate-50 transition-colors';
+                tr.innerHTML = `
+                    <td class="px-6 py-4 text-sm font-bold text-slate-800">${h.nome}</td>
+                    <td class="px-6 py-4 text-center text-sm text-slate-500">${h.episodes}</td>
+                    <td class="px-6 py-4 text-right font-black text-slate-900">${h.plays.toLocaleString('pt-BR')}</td>
+                    <td class="px-6 py-4 text-right font-black text-[#A400E1]">${h.retention > 0 ? h.retention.toFixed(1) + '%' : 'N/A'}</td>`;
                 tBody.appendChild(tr);
             });
         }
 
+        // Caso o Kanban falhe, tenta inferir a galera do Lab pelos temas raízes do período
         function inferHostsFromTitle(titulo) {
             let t = titulo.toUpperCase();
-            if (t.includes("PSI")) return ["Milene V.", "Lidiane M."];
-            if (t.includes("LUIZALABS")) return ["Raissa Xavier", "Nori"];
+            if (t.includes("PSI") || t.includes("SEGURO")) return ["Milene", "Lidiane"];
+            if (t.includes("LUIZALABS")) return ["Raissa", "Nori", "Ana Carolina"];
             if (t.includes("PIX") || t.includes("CAFÉ")) return ["Nori", "Ana Carolina"];
-            if (t.includes("CLOUD") || t.includes("DATA")) return ["Julia S.", "Monica H."];
-            return ["Nori", "Ana Carolina"]; // Fallback padrão da dupla raiz
+            if (t.includes("CLOUD") || t.includes("DATA") || t.includes("NUVEM") || t.includes("STORAGE")) return ["Julia", "Monica", "Yohan"];
+            if (t.includes("IA ") || t.includes("INTELIGÊNCIA")) return ["Nori", "Ana Carolina", "Convidado Especial"];
+            return ["Equipe Geral"]; 
         }
 
-        // Engine de Sincronização e Boot
-        async function recarregarDados() {
-            const statusLabel = document.getElementById('connectionStatus');
-            try {
-                const rowsDiario = await fetchGoogleSheetsData("Métricas Diárias");
-                const rowsEpisodios = await fetchGoogleSheetsData("Performance_Episódios");
-
-                liveDiario = rowsDiario.map(r => {
-                    const c = r.c;
-                    return {
-                        data: c[0] ? extrairDataISO(c[0].v || c[0].f) : "",
-                        streams: c[1] ? c[1].v : 0, tempoConsumo: c[2] ? c[2].v : 0,
-                        seguidores: c[5] ? c[5].v : 0, recorrente: c[7] ? c[7].v : 0, novidade: c[8] ? c[8].v : 0
-                    };
-                }).filter(d => d.data !== "");
-
-                liveEpisodios = rowsEpisodios.map(r => {
-                    const c = r.c;
-                    return {
-                        titulo: c[0] ? c[0].v : "", data: c[1] ? c[1].f || c[1].v : "",
-                        desempenho: c[2] ? c[2].v : "Normal", plays: c[3] ? c[3].v : 0,
-                        finalizacao: c[4] ? c[4].v : 0, hosts: c[6] ? c[6].v : "" // Hosts mapeado na coluna 7 do Apps Script novo
-                    };
-                }).filter(e => e.titulo !== "");
-
-                statusLabel.className = "text-[10px] bg-emerald-100 text-emerald-700 font-extrabold px-2.5 py-0.5 rounded-full uppercase flex items-center";
-                statusLabel.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span><span>🟢 Planilha Conectada</span>`;
-
-                if(liveDiario.length > 0) setPeriodPreset('all');
-                populateDetailedTable(liveEpisodios);
-                renderHostsChartAndTable();
-
-            } catch (err) {
-                console.error("Erro na leitura da planilha", err);
-                statusLabel.className = "text-[10px] bg-red-100 text-red-700 font-extrabold px-2.5 py-0.5 rounded-full uppercase";
-                statusLabel.innerHTML = `🔴 Falha na Leitura API`;
-            }
+        // --- FALLBACK MOCK (Se a API bloqueiar, injetamos os dados reais consolidados de 2026 que extraímos para mostrar como funciona) ---
+        function simularDadosMock() {
+            fullDiario = [
+                {data: "2026-06-01", streams: 210, tempoConsumo: 15, seguidores: 13500, recorrente: 130, novidade: 80},
+                {data: "2026-06-15", streams: 340, tempoConsumo: 22, seguidores: 13600, recorrente: 180, novidade: 160},
+                {data: "2026-07-01", streams: 150, tempoConsumo: 10, seguidores: 13800, recorrente: 100, novidade: 50},
+                {data: "2026-07-09", streams: 850, tempoConsumo: 65, seguidores: 13905, recorrente: 400, novidade: 450} // Spike do epi de PSI
+            ];
+            fullEpisodios = [
+                {titulo: "POR QUE A PSI É VITAL PARA O NEGÓCIO? #VEMSERFELIZSEGURO", dataPub: "2026-07-09", desempenho: "Acima", plays: 1620, finalizacao: 70, hosts: "Milene, Lidiane"},
+                {titulo: "POR DENTRO DO LUIZALABS: TIME PDP E LISTAGENS", dataPub: "2026-07-02", desempenho: "Abaixo", plays: 201, finalizacao: 37, hosts: "Raissa, Nori"},
+                {titulo: "CAI NA HORA: O PRODUTO POR TRÁS DO PIX", dataPub: "2026-06-25", desempenho: "Acima", plays: 520, finalizacao: 46, hosts: "Nori, Ana Carolina"},
+                {titulo: "IA E O RISCO DE DEPENDER DEMAIS - PAPO DO CAFÉ #30", dataPub: "2026-06-18", desempenho: "Normal", plays: 402, finalizacao: 50, hosts: "Nori, Ana Carolina"},
+                {titulo: "DADOS NA NUVEM: ENTENDENDO O OBJECT STORAGE", dataPub: "2026-03-26", desempenho: "Acima", plays: 612, finalizacao: 25, hosts: "Monica, Julia"}
+            ];
         }
 
-        window.addEventListener('DOMContentLoaded', () => { recarregarDados(); });
+        // Boot
+        window.addEventListener('DOMContentLoaded', () => { 
+            recarregarDados(); 
+            // Inicia Aba 1
+            document.getElementById("btn-tab1").click();
+        });
     </script>
 </body>
 </html>
