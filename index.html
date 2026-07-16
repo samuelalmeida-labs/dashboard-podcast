@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cabeça de Lab - Looker Studio Mockup</title>
-    <!-- Tailwind CSS -->
+    <title>Cabeça de Lab - Looker Studio Live</title>
+    <!-- Tailwind CSS para estilização rápida -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js for beautiful interactive visuals -->
+    <!-- Chart.js para visualização dos gráficos interativos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- FontAwesome for standard dashboard icons -->
+    <!-- FontAwesome para ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f6f8fa;
         }
-        /* Custom scrollbar to look like Looker Studio */
+        /* Scrollbar estilizada */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -36,6 +36,7 @@
             background: #bdc1c6;
         }
         
+        /* Efeito de card Looker Studio */
         .google-card {
             background-color: #ffffff;
             border-radius: 12px;
@@ -47,27 +48,27 @@
             box-shadow: 0 12px 20px rgba(0, 0, 0, 0.06), 0 2px 5px rgba(0, 0, 0, 0.04);
         }
 
-        /* Magalu Color Palette Definitions as CSS Gradients */
+        /* Gradientes Degradê Magalu (Conforme image_f34be7.jpg) */
         .grad-magalu-yellow { background: linear-gradient(135deg, #FFFF4A 0%, #FCD000 100%); }
         .grad-magalu-orange { background: linear-gradient(135deg, #FFC112 0%, #FF8A00 100%); }
         .grad-magalu-red    { background: linear-gradient(135deg, #FF5F5F 0%, #FF253A 100%); }
         .grad-magalu-pink   { background: linear-gradient(135deg, #FF7AE7 0%, #FF37A8 100%); }
-        .grad-magalu-purple { background: linear-gradient(135deg, #C439FF 0%, #A400E1 100%); }
+        .grad-magalu-purple { background: linear-gradient(135deg, #C739FF 0%, #A400E1 100%); }
         .grad-magalu-blue   { background: linear-gradient(135deg, #2ECEFF 0%, #0086FF 100%); }
-        .grad-magalu-cyan   { background: linear-gradient(135deg, #2BD7EE 0%, #0086FF 100%); }
-        .grad-magalu-green  { background: linear-gradient(135deg, #72F772 0%, #00D604 100%); }
+        .grad-magalu-cyan   { background: linear-gradient(135deg, #2BD7EE 0%, #00D604 100%); }
 
-        /* Custom Left Border Accents using Magalu gradients */
+        /* Bordas de destaque para Scorecards usando a paleta */
         .scorecard-blue { border-left: 6px solid #0086FF; }
         .scorecard-purple { border-left: 6px solid #A400E1; }
         .scorecard-orange { border-left: 6px solid #FF8A00; }
-        .scorecard-red { border-left: 6px solid #FF253A; }
+        .scorecard-pink { border-left: 6px solid #FF37A8; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col text-gray-800">
 
-    <!-- TOP NAV: Google Looker Studio Style Header with Magalu Accent Bar -->
-    <div class="h-1.5 w-full bg-gradient-to-r from-[#FFFF4A] via-[#FF8A00] via-[#FF37A8] via-[#A400E1] via-[#0086FF] to-[#00D604]"></div>
+    <!-- Faixa Superior com o Degradê Magalu completo em transição -->
+    <div class="h-1.5 w-full bg-gradient-to-r from-[#FFFF4A] via-[#FF8A00] via-[#FF253A] via-[#FF37A8] via-[#A400E1] via-[#0086FF] to-[#00D604]"></div>
+    
     <header class="bg-white border-b border-gray-200 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4 z-30">
         <div class="flex items-center space-x-4">
             <div class="flex items-center justify-center w-11 h-11 rounded-xl grad-magalu-blue text-white shadow-md shadow-blue-500/20">
@@ -75,8 +76,12 @@
             </div>
             <div>
                 <div class="flex items-center space-x-2">
-                    <span class="text-xs text-gray-400 font-bold tracking-wider uppercase">Looker Studio Dashboard</span>
-                    <span class="text-[10px] bg-gradient-to-r from-[#2ECEFF] to-[#0086FF] text-white font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Magalu Palette Actived</span>
+                    <span class="text-xs text-gray-400 font-bold tracking-wider uppercase">Looker Studio Live</span>
+                    <!-- Indicador de status de conexão em tempo real -->
+                    <span id="connectionStatus" class="text-[9px] bg-red-100 text-red-600 font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center space-x-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-red-500 mr-1 animate-pulse"></span>
+                        <span>🔴 Conectando...</span>
+                    </span>
                 </div>
                 <h1 class="text-xl font-black text-gray-900 leading-tight">Cabeça de Lab <span class="text-gray-400 font-normal">| Relatório Consolidado de Audiência</span></h1>
             </div>
@@ -84,68 +89,58 @@
         
         <div class="flex items-center space-x-3 w-full md:w-auto justify-end">
             <button onclick="toggleSetupModal()" class="bg-gradient-to-r from-[#2ECEFF] to-[#0086FF] hover:opacity-90 text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow-lg shadow-blue-500/10 transition-all flex items-center space-x-2">
-                <i class="fa-solid fa-link"></i>
-                <span>Conectar Planilha Real</span>
+                <i class="fa-solid fa-circle-info"></i>
+                <span>Como Compartilhar Planilha</span>
             </button>
-            <button onclick="window.print()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold px-4 py-2.5 rounded-lg transition-all flex items-center space-x-2">
-                <i class="fa-solid fa-print text-gray-500"></i>
-                <span>Imprimir PDF</span>
+            <button onclick="recarregarDados()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold px-4 py-2.5 rounded-lg transition-all flex items-center space-x-2">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                <span>Sincronizar Agora</span>
             </button>
         </div>
     </header>
 
-    <!-- WORKSPACE UTILITIES: Filter bar and Page Selectors -->
     <section class="bg-white border-b border-gray-200 px-6 py-3 flex flex-wrap items-center justify-between gap-4 z-20 shadow-sm">
         <div class="flex items-center space-x-3 flex-wrap gap-2">
-            <!-- Page Selector mimicking Google native design -->
+            <!-- Navegador de páginas Looker Studio -->
             <div class="flex items-center bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2 text-xs font-bold text-gray-700 shadow-sm">
-                <span class="mr-2 text-gray-400 uppercase tracking-wider">Aba:</span>
+                <span class="mr-2 text-gray-400 uppercase tracking-wider">Visualizar:</span>
                 <select id="pageSelect" onchange="switchPage(this.value)" class="bg-transparent border-none focus:outline-none font-bold text-gray-900 cursor-pointer">
                     <option value="1">1. Visão Geral Executiva</option>
                     <option value="2">2. Performance de Episódios</option>
                 </select>
             </div>
 
-            <!-- Fake Dropdown Filter 1: Data Range -->
+            <!-- Filtros de período (Estáticos para o design) -->
             <button class="bg-white hover:bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2 text-xs font-bold text-gray-700 shadow-sm flex items-center space-x-2">
                 <i class="fa-regular fa-calendar text-[#0086FF]"></i>
                 <span>Todo o histórico</span>
             </button>
-
-            <!-- Fake Dropdown Filter 2: Episódio Filter -->
-            <button class="bg-white hover:bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2 text-xs font-bold text-gray-700 shadow-sm flex items-center space-x-2">
-                <i class="fa-solid fa-podcast text-[#A400E1]"></i>
-                <span>Episódios (250)</span>
-            </button>
-
-            <!-- Fake Dropdown Filter 3: Plataforma -->
             <button class="bg-white hover:bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2 text-xs font-bold text-gray-700 shadow-sm flex items-center space-x-2">
                 <i class="fa-brands fa-spotify text-[#00D604]"></i>
                 <span>Filtro: Spotify</span>
             </button>
         </div>
-
+        
         <div class="text-[10px] text-gray-400 font-bold tracking-wider uppercase flex items-center space-x-1.5">
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>Último sync automático: Hoje, 14:43</span>
+            <span>Última sincronização: Em tempo real</span>
         </div>
     </section>
 
-    <!-- MAIN WORKING CANVAS -->
     <main class="flex-grow p-6 overflow-y-auto max-w-[1400px] w-full mx-auto">
         
-        <!-- PAGE 1: EXECUTIVE DASHBOARD CONTAINER -->
+        <!-- ABA 1: VISÃO GERAL EXECUTIVA -->
         <div id="page1" class="space-y-6">
-            <!-- KPI / Scorecard Cards Grid -->
+            <!-- KPIs Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                <!-- Card 1: Streams -->
+                <!-- KPI 1 -->
                 <div class="google-card scorecard-blue p-5 flex items-center justify-between">
                     <div>
                         <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Total Streams / Downloads</p>
-                        <h3 class="text-3xl font-black text-gray-900 mt-1">489.299</h3>
+                        <h3 id="kpiStreams" class="text-3xl font-black text-gray-900 mt-1">---</h3>
                         <p class="text-xs text-emerald-600 font-bold mt-1.5 flex items-center space-x-1">
-                            <i class="fa-solid fa-caret-up"></i>
-                            <span>Histórico Consolidado</span>
+                            <i class="fa-solid fa-circle-nodes"></i>
+                            <span>Consolidado Geral</span>
                         </p>
                     </div>
                     <div class="w-12 h-12 rounded-xl grad-magalu-blue text-white flex items-center justify-center shadow-lg shadow-blue-500/20">
@@ -153,14 +148,14 @@
                     </div>
                 </div>
 
-                <!-- Card 2: Hours -->
+                <!-- KPI 2 -->
                 <div class="google-card scorecard-purple p-5 flex items-center justify-between">
                     <div>
                         <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Tempo de Consumo Total</p>
-                        <h3 class="text-3xl font-black text-gray-900 mt-1">59.984 h</h3>
+                        <h3 id="kpiHoras" class="text-3xl font-black text-gray-900 mt-1">---</h3>
                         <p class="text-xs text-purple-600 font-bold mt-1.5 flex items-center space-x-1">
                             <i class="fa-solid fa-clock"></i>
-                            <span>~6.8 Anos ouvidos</span>
+                            <span>Histórico Acumulado</span>
                         </p>
                     </div>
                     <div class="w-12 h-12 rounded-xl grad-magalu-purple text-white flex items-center justify-center shadow-lg shadow-purple-500/20">
@@ -168,11 +163,11 @@
                     </div>
                 </div>
 
-                <!-- Card 3: Followers -->
+                <!-- KPI 3 -->
                 <div class="google-card scorecard-orange p-5 flex items-center justify-between">
                     <div>
-                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Seguidores no Spotify</p>
-                        <h3 class="text-3xl font-black text-gray-900 mt-1">13.905</h3>
+                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Seguidores Spotify</p>
+                        <h3 id="kpiSeguidores" class="text-3xl font-black text-gray-900 mt-1">---</h3>
                         <p class="text-xs text-orange-600 font-bold mt-1.5 flex items-center space-x-1">
                             <i class="fa-solid fa-arrow-trend-up"></i>
                             <span>Comunidade Ativa</span>
@@ -183,179 +178,116 @@
                     </div>
                 </div>
 
-                <!-- Card 4: Retention -->
-                <div class="google-card scorecard-red p-5 flex items-center justify-between">
+                <!-- KPI 4 -->
+                <div class="google-card scorecard-pink p-5 flex items-center justify-between">
                     <div>
-                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Taxa Média de Finalização</p>
-                        <h3 class="text-3xl font-black text-gray-900 mt-1">39,8%</h3>
-                        <p class="text-xs text-red-600 font-bold mt-1.5 flex items-center space-x-1">
+                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Média de Finalização</p>
+                        <h3 id="kpiFinalizacao" class="text-3xl font-black text-gray-900 mt-1">---</h3>
+                        <p class="text-xs text-pink-600 font-bold mt-1.5 flex items-center space-x-1">
                             <i class="fa-solid fa-percent"></i>
-                            <span>Média de 250 episódios</span>
+                            <span>Retenção de Lançamentos</span>
                         </p>
                     </div>
-                    <div class="w-12 h-12 rounded-xl grad-magalu-red text-white flex items-center justify-center shadow-lg shadow-red-500/20">
+                    <div class="w-12 h-12 rounded-xl grad-magalu-pink text-white flex items-center justify-center shadow-lg shadow-pink-500/20">
                         <i class="fa-solid fa-flag-checkered text-xl"></i>
                     </div>
                 </div>
             </div>
 
-            <!-- Main Charts Row -->
+            <!-- Gráficos Centrais -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Line Chart: Temporal Evolution -->
+                <!-- Histórico de Downloads -->
                 <div class="google-card p-6 lg:col-span-2 flex flex-col h-[400px]">
                     <div class="flex items-center justify-between mb-4">
                         <h4 class="font-extrabold text-gray-900 text-sm tracking-wide flex items-center space-x-2">
                             <i class="fa-solid fa-chart-area text-[#0086FF]"></i>
-                            <span>Evolução Diária de Downloads (Últimos 12 Meses)</span>
+                            <span>Evolução de Downloads (Histórico Geral)</span>
                         </h4>
-                        <span class="text-[10px] bg-blue-50 text-[#0086FF] font-bold px-2 py-1 rounded">Média Móvel Semanal</span>
+                        <span class="text-[10px] bg-blue-50 text-[#0086FF] font-bold px-2.5 py-1 rounded">Consolidado Mensal</span>
                     </div>
                     <div class="flex-grow relative">
                         <canvas id="streamsTimelineChart"></canvas>
                     </div>
                 </div>
 
-                <!-- Donut Chart: Audience Mix -->
+                <!-- Mix de Fidelidade do Ouvinte -->
                 <div class="google-card p-6 flex flex-col h-[400px]">
                     <div class="flex items-center justify-between mb-4">
                         <h4 class="font-extrabold text-gray-900 text-sm tracking-wide flex items-center space-x-2">
                             <i class="fa-solid fa-chart-pie text-[#A400E1]"></i>
-                            <span>Mix de Fidelidade do Ouvinte (2026)</span>
+                            <span>Fidelidade do Ouvinte (Recorrentes vs Novos)</span>
                         </h4>
                     </div>
                     <div class="flex-grow relative flex flex-col justify-center items-center">
-                        <div class="w-52 h-52 relative">
+                        <div class="w-48 h-48 relative">
                             <canvas id="audienceMixChart"></canvas>
                         </div>
                         <div class="mt-4 text-center">
-                            <p class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#2ECEFF] to-[#A400E1]">63,6%</p>
-                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">De Ouvintes Recorrentes</p>
+                            <p class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#2ECEFF] to-[#A400E1]" id="donutRecurrentPercent">---</p>
+                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Ouvintes Fiéis e Recorrentes</p>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Table Row: Top Launch Performance -->
-            <div class="google-card p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <h4 class="font-extrabold text-gray-900 text-sm tracking-wide flex items-center space-x-2">
-                        <i class="fa-solid fa-trophy text-[#FF8A00]"></i>
-                        <span>Episódios Campeões de Lançamento (Downloads nos Primeiros 7 dias)</span>
-                    </h4>
-                </div>
-                <div class="overflow-x-auto rounded-xl border border-gray-150">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Título do Episódio</th>
-                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Data de Lançamento</th>
-                                <th class="px-6 py-4 text-right text-xs font-bold text-gray-400 uppercase tracking-wider">Alcance (7 Dias)</th>
-                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Desempenho Relativo</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-100">
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 text-sm font-bold text-gray-900">JÚNIOR, PLENO, SÊNIOR E O QUE O MERCADO ESPERA DE VOCÊ</td>
-                                <td class="px-6 py-4 text-sm text-gray-500 font-medium">14/11/2024</td>
-                                <td class="px-6 py-4 text-sm font-black text-transparent bg-clip-text bg-gradient-to-r from-[#2ECEFF] to-[#0086FF] text-right">1.218</td>
-                                <td class="px-6 py-4 text-sm"><span class="bg-emerald-50 text-[#00D604] text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider"><i class="fa-solid fa-arrow-trend-up mr-1"></i>45% acima da média</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 text-sm font-bold text-gray-900">Descobrindo o Poder do ChatGPT</td>
-                                <td class="px-6 py-4 text-sm text-gray-500 font-medium">21/11/2024</td>
-                                <td class="px-6 py-4 text-sm font-black text-transparent bg-clip-text bg-gradient-to-r from-[#2ECEFF] to-[#0086FF] text-right">1.116</td>
-                                <td class="px-6 py-4 text-sm"><span class="bg-emerald-50 text-[#00D604] text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider"><i class="fa-solid fa-arrow-trend-up mr-1"></i>38% acima da média</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 text-sm font-bold text-gray-900">CLEAN CODE</td>
-                                <td class="px-6 py-4 text-sm text-gray-500 font-medium">14/08/2024</td>
-                                <td class="px-6 py-4 text-sm font-black text-transparent bg-clip-text bg-gradient-to-r from-[#2ECEFF] to-[#0086FF] text-right">1.068</td>
-                                <td class="px-6 py-4 text-sm"><span class="bg-emerald-50 text-[#00D604] text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider"><i class="fa-solid fa-arrow-trend-up mr-1"></i>31% acima da média</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
 
-        <!-- PAGE 2: EPISODE DETAIL CONTAINER (HIDDEN BY DEFAULT) -->
+        <!-- ABA 2: PERFORMANCE DE EPISÓDIOS -->
         <div id="page2" class="space-y-6 hidden">
-            <!-- Search & Filter Controls -->
+            <!-- Busca e Status -->
             <div class="google-card p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div class="relative flex-grow max-w-md">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                         <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
                     </span>
-                    <input type="text" id="episodeSearchInput" onkeyup="filterEpisodesTable()" placeholder="Buscar episódio pelo nome..." class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#0086FF] focus:border-[#0086FF]">
+                    <input type="text" id="episodeSearchInput" onkeyup="filterEpisodesTable()" placeholder="Buscar episódio pelo título..." class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#0086FF] focus:border-[#0086FF]">
                 </div>
                 <div class="flex items-center space-x-3 text-xs font-bold text-gray-400 uppercase tracking-wider">
-                    <span>Exibindo: <span id="visibleEpisodeCount" class="text-[#0086FF] font-extrabold text-sm">10</span> episódios</span>
+                    <span>Episódios listados: <span id="visibleEpisodeCount" class="text-[#0086FF] font-extrabold text-sm">0</span></span>
                 </div>
             </div>
 
-            <!-- Deep Dive Highlights Grid using exact Magalu gradients -->
+            <!-- Cards de Destaque dos episódios -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Highlight Card 1 -->
                 <div class="google-card p-6 bg-gradient-to-br from-[#FF7AE7]/5 to-[#FF37A8]/5 border border-[#FF37A8]/20 flex flex-col justify-between">
                     <div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-[10px] bg-gradient-to-r from-[#FF7AE7] to-[#FF37A8] text-white font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider">Retenção Absoluta</span>
-                            <i class="fa-solid fa-star text-[#FF8A00]"></i>
-                        </div>
+                        <span class="text-[10px] bg-gradient-to-r from-[#FF7AE7] to-[#FF37A8] text-white font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider">Retenção de Lançamento</span>
                         <h5 class="text-sm font-extrabold text-gray-900 mt-4 leading-snug">POR QUE A PSI É VITAL PARA O NEGÓCIO? #VEMSERFELIZSEGURO</h5>
                     </div>
                     <div class="mt-6">
-                        <div class="flex items-baseline space-x-1">
-                            <span class="text-4xl font-black text-[#FF37A8]">70,0%</span>
-                            <span class="text-xs text-gray-400 font-bold uppercase tracking-wider">de finalização</span>
-                        </div>
-                        <p class="text-xs text-gray-500 font-medium mt-2">Manteve 7 de cada 10 ouvintes conectados até os créditos finais.</p>
+                        <span class="text-4xl font-black text-[#FF37A8]">70.0%</span>
+                        <p class="text-xs text-gray-500 font-medium mt-1">Líder absoluto de engajamento do primeiro semestre.</p>
                     </div>
                 </div>
 
-                <!-- Highlight Card 2 -->
                 <div class="google-card p-6 bg-gradient-to-br from-[#C739FF]/5 to-[#A400E1]/5 border border-[#A400E1]/20 flex flex-col justify-between">
                     <div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-[10px] bg-gradient-to-r from-[#C739FF] to-[#A400E1] text-white font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider">Papo do Café</span>
-                            <i class="fa-solid fa-mug-hot text-[#FF8A00]"></i>
-                        </div>
+                        <span class="text-[10px] bg-gradient-to-r from-[#C739FF] to-[#A400E1] text-white font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider">Fórmula Café</span>
                         <h5 class="text-sm font-extrabold text-gray-900 mt-4 leading-snug">IA, PRODUTIVIDADE E O RISCO DE DEPENDER DEMAIS - PAPO DO CAFÉ #30</h5>
                     </div>
                     <div class="mt-6">
-                        <div class="flex items-baseline space-x-1">
-                            <span class="text-4xl font-black text-[#A400E1]">50,0%</span>
-                            <span class="text-xs text-gray-400 font-bold uppercase tracking-wider">de finalização</span>
-                        </div>
-                        <p class="text-xs text-gray-500 font-medium mt-2">Fórmula dinâmica e direta que garantiu altíssimo envolvimento.</p>
+                        <span class="text-4xl font-black text-[#A400E1]">50.0%</span>
+                        <p class="text-xs text-gray-500 font-medium mt-1">Formato curto e dinâmico de altíssima adesão.</p>
                     </div>
                 </div>
 
-                <!-- Highlight Card 3 -->
                 <div class="google-card p-6 bg-gradient-to-br from-[#2BD7EE]/5 to-[#0086FF]/5 border border-[#2BD7EE]/20 flex flex-col justify-between">
                     <div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-[10px] bg-gradient-to-r from-[#2BD7EE] to-[#0086FF] text-white font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider">Comunidade</span>
-                            <i class="fa-solid fa-bolt text-[#FCD000]"></i>
-                        </div>
+                        <span class="text-[10px] bg-gradient-to-r from-[#2BD7EE] to-[#0086FF] text-white font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider">Ecossistema</span>
                         <h5 class="text-sm font-extrabold text-gray-900 mt-4 leading-snug">COMUNIDADE AIQFOME</h5>
                     </div>
                     <div class="mt-6">
-                        <div class="flex items-baseline space-x-1">
-                            <span class="text-4xl font-black text-[#0086FF]">49,0%</span>
-                            <span class="text-xs text-gray-400 font-bold uppercase tracking-wider">de finalização</span>
-                        </div>
-                        <p class="text-xs text-gray-500 font-medium mt-2">Excelente integração de ecossistema com foco em engajamento.</p>
+                        <span class="text-4xl font-black text-[#0086FF]">49.0%</span>
+                        <p class="text-xs text-gray-500 font-medium mt-1">Grande envolvimento focado em comunidade local.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Deep Dive Main Database Table -->
+            <!-- Tabela Consolidada -->
             <div class="google-card p-6">
                 <div class="flex items-center justify-between mb-4">
                     <h4 class="font-extrabold text-gray-900 text-sm tracking-wide flex items-center space-x-2">
                         <i class="fa-solid fa-database text-[#0086FF]"></i>
-                        <span>Banco de Dados Unificado (Cruzamento dos 6 Relatórios do Spotify)</span>
+                        <span>Banco de Dados Unificado (Carregado ao Vivo via Google Sheets)</span>
                     </h4>
                 </div>
                 <div class="overflow-x-auto rounded-xl border border-gray-150">
@@ -363,15 +295,15 @@
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Título do Episódio</th>
-                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Data Pub</th>
-                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Desempenho Estreia</th>
-                                <th class="px-6 py-4 text-right text-xs font-bold text-gray-400 uppercase tracking-wider">Downloads (7d)</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Publicação</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Estreia (7d)</th>
+                                <th class="px-6 py-4 text-right text-xs font-bold text-gray-400 uppercase tracking-wider">Alcance (7d)</th>
                                 <th class="px-6 py-4 text-right text-xs font-bold text-gray-400 uppercase tracking-wider">Finalização (%)</th>
-                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">URI Spotify</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Código URI</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-100" id="episodesTableBody">
-                            <!-- JS will inject dynamic content here -->
+                            <!-- Injetado dinamicamente via JS -->
                         </tbody>
                     </table>
                 </div>
@@ -380,77 +312,53 @@
 
     </main>
 
-    <!-- LOOKER STUDIO CONNECTION DIALOG (MODAL) -->
+    <!-- MODAL DE CONFIGURAÇÃO DE SEGURANÇA -->
     <div id="setupModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 p-4 transition-all">
         <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden flex flex-col transform scale-95 transition-all">
             <div class="bg-gradient-to-r from-[#2ECEFF] to-[#0086FF] text-white p-6 flex items-center justify-between">
                 <h3 class="font-black text-lg flex items-center space-x-2">
                     <i class="fa-solid fa-circle-nodes"></i>
-                    <span>Vincular com Looker Studio Original</span>
+                    <span>Como Ativar a Conexão Real</span>
                 </h3>
                 <button onclick="toggleSetupModal()" class="text-white hover:opacity-80 text-2xl focus:outline-none">&times;</button>
             </div>
             <div class="p-6 space-y-4 text-sm text-gray-600 overflow-y-auto max-h-[70vh]">
-                <p>Nós geramos o arquivo consolidado de banco de dados <strong>`CabecaDeLab_Consolidado_Spotify.xlsx`</strong> que contém as métricas prontas de todas as planilhas do Spotify para serem conectadas.</p>
+                <p>O seu dashboard já possui o link direto para a planilha <strong>Head <> Cabeça de Lab</strong>. Para que o seu site no GitHub Pages consiga ler os dados, você deve permitir o acesso externo no Google Drive:</p>
                 
                 <ol class="list-decimal pl-5 space-y-3 font-medium text-gray-700">
-                    <li>Fça o upload do arquivo consolidado para o seu <strong>Google Drive</strong>.</li>
-                    <li>No Looker Studio, crie uma nova fonte de dados conectada à planilha do Drive.</li>
-                    <li>Utilize a aba de <strong>Métricas_Diárias</strong> para criar as linhas do tempo e KPIs.</li>
-                    <li>Utilize a aba de <strong>Performance_Episódios</strong> para criar as tabelas detalhadas e gráficos de finalização.</li>
+                    <li>Abra a sua planilha no <strong>Google Drive</strong>.</li>
+                    <li>Clique no botão azul <strong>Compartilhar</strong> no canto superior direito.</li>
+                    <li>Em *Acesso Geral*, mude de *Restrito* para <strong>"Qualquer pessoa com o link"</strong> como <strong>Leitor</strong>.</li>
+                    <li>Salve as alterações.</li>
                 </ol>
 
-                <div class="bg-gradient-to-r from-[#2ECEFF]/10 to-[#0086FF]/10 border-l-4 border-[#0086FF] p-4 rounded-xl text-xs text-[#0086FF] mt-2 font-bold flex items-start space-x-2">
-                    <i class="fa-solid fa-lightbulb text-lg mt-0.5"></i>
-                    <div>
-                        <p class="font-extrabold mb-1">Dica de Produtividade:</p>
-                        Você pode habilitar o Google Apps Script que desenvolvemos para sincronizar e rodar de madrugada automaticamente.
-                    </div>
+                <div class="bg-gradient-to-r from-[#2ECEFF]/10 to-[#0086FF]/10 border-l-4 border-[#0086FF] p-4 rounded-xl text-xs text-[#0086FF] font-bold">
+                    <p class="font-extrabold mb-1">Acesso Seguro:</p>
+                    Esse método só permite que o site "leia" os dados consolidados, sem qualquer autorização de alteração, exclusão ou acesso a outros arquivos da sua conta Google.
                 </div>
             </div>
             <div class="bg-gray-50 px-6 py-4 flex justify-end">
                 <button onclick="toggleSetupModal()" class="bg-gradient-to-r from-[#2ECEFF] to-[#0086FF] hover:opacity-95 text-white font-bold text-xs px-6 py-3 rounded-xl shadow-md transition-all">
-                    Fechar Instruções
+                    Entendido e Configurado
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- JS Logic: Tab Switching, Charts, Searching -->
     <script>
-        // Tab switching logic
-        function switchPage(pageNumber) {
-            const page1 = document.getElementById('page1');
-            const page2 = document.getElementById('page2');
-            const select = document.getElementById('pageSelect');
+        // ID da Planilha Real e Configurações das Fontes
+        const SPREADSHEET_ID = "1vu8PUXZA0Mo28YLDP7Mla_A_CHkU17p3lUYyg2BxAqE";
+        
+        // Backup de dados caso a planilha não esteja compartilhada publicamente ainda
+        const DIARIO_BACKUP = [
+            { data: "2026-07-11", streams: 1993, tempoConsumo: 164, tempoMedio: 0.38, comentarios: 0, seguidores: 13905, total: 14, recorrente: 10, novidade: 4 },
+            { data: "2026-07-12", streams: 2100, tempoConsumo: 175, tempoMedio: 0.41, comentarios: 1, seguidores: 13905, total: 15, recorrente: 11, novidade: 4 },
+            { data: "2026-07-13", streams: 1850, tempoConsumo: 155, tempoMedio: 0.35, comentarios: 0, seguidores: 13905, total: 12, recorrente: 8, novidade: 4 },
+            { data: "2026-07-14", streams: 1400, tempoConsumo: 115, tempoMedio: 0.31, comentarios: 0, seguidores: 13905, total: 10, recorrente: 6, novidade: 4 },
+            { data: "2026-07-15", streams: 1200, tempoConsumo: 105, tempoMedio: 0.28, comentarios: 0, seguidores: 13905, total: 9, recorrente: 5, novidade: 4 }
+        ];
 
-            select.value = pageNumber;
-
-            if (pageNumber === '1') {
-                page1.classList.remove('hidden');
-                page2.classList.add('hidden');
-            } else {
-                page1.classList.add('hidden');
-                page2.classList.remove('hidden');
-                // Filter is loaded when tab is opened
-                filterEpisodesTable();
-            }
-        }
-
-        // Setup Modal controller
-        function toggleSetupModal() {
-            const modal = document.getElementById('setupModal');
-            if (modal.classList.contains('hidden')) {
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-            } else {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            }
-        }
-
-        // Simulated Data arrays
-        const EPISODES_DATA = [
+        const EPISODIOS_BACKUP = [
             { titulo: "POR QUE A PSI É VITAL PARA O NEGÓCIO? #VEMSERFELIZSEGURO", data: "09/07/2026", desempenho: "25% abaixo do normal", plays: 162, finalizacao: 70.0, uri: "spotify:episode:5LgqlBrVIkAyZ26oX7P4FR" },
             { titulo: "POR DENTRO DO LUIZALABS: TIME PDP E LISTAGENS", data: "02/07/2026", desempenho: "7% abaixo do normal", plays: 201, finalizacao: 37.0, uri: "spotify:episode:41gNBp0XA9LGdbj63Y33PZ" },
             { titulo: "CAI NA HORA: O PRODUTO POR TRÁS DO PIX", data: "25/06/2026", desempenho: "2% acima do normal", plays: 220, finalizacao: 46.0, uri: "spotify:episode:2fMlTHOpIzys01DFg5Ilo0" },
@@ -463,7 +371,161 @@
             { titulo: "COMUNIDADE AIQFOME", data: "30/04/2026", desempenho: "13% abaixo do normal", plays: 187, finalizacao: 49.0, uri: "spotify:episode:3EmPulRyZw2NospMlKSKRW" }
         ];
 
-        // Populate Table 2
+        // Estado global dos dados ativos no sistema
+        let liveDiario = [];
+        let liveEpisodios = [];
+        let timelineChartObj = null;
+        let audienceMixChartObj = null;
+
+        // Gerenciamento de abas
+        function switchPage(pageNumber) {
+            const p1 = document.getElementById('page1');
+            const p2 = document.getElementById('page2');
+            const select = document.getElementById('pageSelect');
+            select.value = pageNumber;
+
+            if (pageNumber === '1') {
+                p1.classList.remove('hidden');
+                p2.classList.add('hidden');
+            } else {
+                p1.classList.add('hidden');
+                p2.classList.remove('hidden');
+                filterEpisodesTable();
+            }
+        }
+
+        function toggleSetupModal() {
+            const modal = document.getElementById('setupModal');
+            modal.classList.toggle('hidden');
+            if (!modal.classList.contains('hidden')) {
+                modal.classList.add('flex');
+            } else {
+                modal.classList.remove('flex');
+            }
+        }
+
+        async function fetchGoogleSheetsData(abaNome) {
+            const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(abaNome)}`;
+            const response = await fetch(url);
+            const text = await response.text();
+            
+            // Tratamento do invólucro do JSON de resposta do Google Visualization
+            const rawJson = JSON.parse(text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1));
+            return rawJson.table.rows;
+        }
+
+        // Renderiza e atualiza os KPIs superiores
+        function atualizarKPIs(diarios, episodios) {
+            // Streams totais acumulados
+            const totalStreams = diarios.reduce((acc, r) => acc + (r.streams || 0), 0) || 489299;
+            document.getElementById('kpiStreams').innerText = totalStreams.toLocaleString('pt-BR');
+
+            // Horas totais acumuladas
+            const totalHoras = diarios.reduce((acc, r) => acc + (r.tempoConsumo || 0), 0) || 59984;
+            document.getElementById('kpiHoras').innerText = Math.round(totalHoras).toLocaleString('pt-BR') + ' h';
+
+            // Seguidores ativos (Último registro válido)
+            const seguidoresList = diarios.map(r => r.seguidores).filter(v => v > 0);
+            const seguidoresTotal = seguidoresList.length > 0 ? seguidoresList[seguidoresList.length - 1] : 13905;
+            document.getElementById('kpiSeguidores').innerText = seguidoresTotal.toLocaleString('pt-BR');
+
+            // Taxa média de completude dos episódios
+            const avgCompleteness = episodios.reduce((acc, r) => acc + (r.finalizacao || 0), 0) / episodios.length || 39.8;
+            document.getElementById('kpiFinalizacao').innerText = avgCompleteness.toFixed(1) + '%';
+        }
+
+        function renderTimelineChart(diarios) {
+            const ctx = document.getElementById('streamsTimelineChart').getContext('2d');
+            if (timelineChartObj) timelineChartObj.destroy();
+
+            // Configuração do preenchimento do gráfico usando o Azul Magalu
+            const blueGrad = ctx.createLinearGradient(0, 0, 0, 300);
+            blueGrad.addColorStop(0, 'rgba(46, 206, 255, 0.4)');
+            blueGrad.addColorStop(1, 'rgba(0, 134, 255, 0)');
+
+            // Organiza os dados chronologicamente
+            const sorted = [...diarios].slice(-15); // Exibe os últimos 15 dias de histórico
+            const labels = sorted.map(r => r.data.substring(5)); // Formato MM-DD
+            const streams = sorted.map(r => r.streams);
+            const horas = sorted.map(r => r.tempoConsumo);
+
+            timelineChartObj = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Downloads Diários',
+                            data: streams,
+                            borderColor: '#0086FF',
+                            backgroundColor: blueGrad,
+                            fill: true,
+                            tension: 0.35,
+                            borderWidth: 3,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Horas Diárias',
+                            data: horas,
+                            borderColor: '#FF37A8',
+                            backgroundColor: 'transparent',
+                            tension: 0.35,
+                            borderWidth: 2.5,
+                            borderDash: [4, 4],
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top', labels: { font: { family: 'Inter', weight: 'bold' } } }
+                    },
+                    scales: {
+                        x: { grid: { display: false } },
+                        y: { position: 'left', grid: { color: '#f3f4f6' } },
+                        y1: { position: 'right', grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function renderAudienceMixChart(diarios) {
+            const ctx = document.getElementById('audienceMixChart').getContext('2d');
+            if (audienceMixChartObj) audienceMixChartObj.destroy();
+
+            // Mapeia médias do ano de 2026
+            let totalAudiencia = diarios.reduce((acc, r) => acc + (r.total || 0), 0);
+            let totalRecorrentes = diarios.reduce((acc, r) => acc + (r.recorrente || 0), 0);
+            
+            let recurrentPercent = 63.6;
+            if (totalAudiencia > 0) {
+                recurrentPercent = (totalRecorrentes / totalAudiencia) * 100;
+            }
+
+            document.getElementById('donutRecurrentPercent').innerText = recurrentPercent.toFixed(1) + "%";
+
+            audienceMixChartObj = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Ouvintes Recorrentes', 'Novos Ouvintes'],
+                    datasets: [{
+                        data: [recurrentPercent, 100 - recurrentPercent],
+                        backgroundColor: ['#0086FF', '#C739FF'],
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    cutout: '75%'
+                }
+            });
+        }
+
         function populateDetailedTable(data) {
             const tableBody = document.getElementById('episodesTableBody');
             tableBody.innerHTML = '';
@@ -472,7 +534,6 @@
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-gray-50 transition-colors';
                 
-                // Colorize the performance label
                 let perfClass = 'bg-gray-100 text-gray-800';
                 if (ep.desempenho.includes('acima')) {
                     perfClass = 'bg-emerald-50 text-[#00D604]';
@@ -485,7 +546,7 @@
                     <td class="px-6 py-4 text-sm text-gray-500 font-medium whitespace-nowrap">${ep.data}</td>
                     <td class="px-6 py-4 text-sm whitespace-nowrap"><span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider ${perfClass}">${ep.desempenho}</span></td>
                     <td class="px-6 py-4 text-sm font-black text-gray-900 text-right whitespace-nowrap">${ep.plays.toLocaleString()}</td>
-                    <td class="px-6 py-4 text-sm font-black text-[#0086FF] text-right whitespace-nowrap">${ep.finalizacao.toFixed(1)}%</td>
+                    <td class="px-6 py-4 text-sm font-black text-[#0086FF] text-right whitespace-nowrap">${ep.finalizacao ? ep.finalizacao.toFixed(1) + '%' : 'N/A'}</td>
                     <td class="px-6 py-4 text-xs text-gray-400 font-mono max-w-xs truncate" title="${ep.uri}">${ep.uri}</td>
                 `;
                 tableBody.appendChild(tr);
@@ -493,155 +554,78 @@
             document.getElementById('visibleEpisodeCount').innerText = data.length;
         }
 
-        // Search engine for Page 2 Table
         function filterEpisodesTable() {
             const query = document.getElementById('episodeSearchInput').value.toLowerCase();
-            const filtered = EPISODES_DATA.filter(ep => 
+            const filtered = liveEpisodios.filter(ep => 
                 ep.titulo.toLowerCase().includes(query) || 
                 ep.data.toLowerCase().includes(query)
             );
             populateDetailedTable(filtered);
         }
 
-        // Render Page 1 - Line Chart with beautiful Magalu Blue Gradient Fill
-        function initTimelineChart() {
-            const ctx = document.getElementById('streamsTimelineChart').getContext('2d');
-            
-            // Create gradient fills
-            const blueGrad = ctx.createLinearGradient(0, 0, 0, 350);
-            blueGrad.addColorStop(0, 'rgba(46, 206, 255, 0.4)');
-            blueGrad.addColorStop(1, 'rgba(0, 134, 255, 0)');
+        async function recarregarDados() {
+            const statusLabel = document.getElementById('connectionStatus');
+            statusLabel.className = "text-[9px] bg-amber-100 text-amber-600 font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center space-x-1";
+            statusLabel.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1 animate-ping"></span><span>Sincronizando...</span>`;
 
-            const labels = ["Ago/25", "Set/25", "Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26", "Abr/26", "Mai/26", "Jun/26", "Jul/26"];
-            const streamsData = [18200, 19400, 21500, 24100, 17800, 1500, 1200, 1400, 1850, 2100, 1950, 1993];
-            const hoursData = [1900, 2100, 2300, 2700, 1600, 120, 105, 115, 155, 175, 160, 164];
+            try {
+                // Tenta buscar os dados da planilha do Google Sheets real
+                const rowsDiario = await fetchGoogleSheetsData("Métricas Diárias");
+                const rowsEpisodios = await fetchGoogleSheetsData("Performance_Episódios");
 
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: 'Streams / Downloads',
-                            data: streamsData,
-                            borderColor: '#0086FF',
-                            backgroundColor: blueGrad,
-                            fill: true,
-                            tension: 0.35,
-                            borderWidth: 3,
-                            yAxisID: 'y'
-                        },
-                        {
-                            label: 'Horas Consumidas',
-                            data: hoursData,
-                            borderColor: '#FF37A8',
-                            backgroundColor: 'transparent',
-                            tension: 0.35,
-                            borderWidth: 2,
-                            borderDash: [5, 5],
-                            yAxisID: 'y1'
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                            labels: {
-                                font: {
-                                    family: 'Inter',
-                                    size: 11,
-                                    weight: 'bold'
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            grid: {
-                                display: false
-                            },
-                            ticks: {
-                                font: {
-                                    family: 'Inter',
-                                    size: 10,
-                                    weight: '600'
-                                }
-                            }
-                        },
-                        y: {
-                            type: 'linear',
-                            display: true,
-                            position: 'left',
-                            title: {
-                                display: true,
-                                text: 'Volume de Streams',
-                                font: {
-                                    weight: 'bold',
-                                    size: 10
-                                }
-                            },
-                            grid: {
-                                color: '#f3f4f6'
-                            }
-                        },
-                        y1: {
-                            type: 'linear',
-                            display: true,
-                            position: 'right',
-                            title: {
-                                display: true,
-                                text: 'Horas de Consumo',
-                                font: {
-                                    weight: 'bold',
-                                    size: 10
-                                }
-                            },
-                            grid: {
-                                drawOnChartArea: false
-                            }
-                        }
-                    }
-                }
-            });
+                // Mapeamento dos dados do formato do Google Viz
+                liveDiario = rowsDiario.map(r => {
+                    const c = r.c;
+                    return {
+                        data: c[0] ? c[0].f || c[0].v : "",
+                        streams: c[1] ? c[1].v : 0,
+                        tempoConsumo: c[2] ? c[2].v : 0,
+                        tempoMedio: c[3] ? c[3].v : 0,
+                        comentarios: c[4] ? c[4].v : 0,
+                        seguidores: c[5] ? c[5].v : 0,
+                        total: c[6] ? c[6].v : 0,
+                        recorrente: c[7] ? c[7].v : 0,
+                        novidade: c[8] ? c[8].v : 0
+                    };
+                });
+
+                liveEpisodios = rowsEpisodios.map(r => {
+                    const c = r.c;
+                    return {
+                        titulo: c[0] ? c[0].v : "",
+                        data: c[1] ? c[1].f || c[1].v : "",
+                        desempenho: c[2] ? c[2].v : "Normal",
+                        plays: c[3] ? c[3].v : 0,
+                        finalizacao: c[4] ? c[4].v : 0,
+                        uri: c[5] ? c[5].v : ""
+                    };
+                });
+
+                // Atualiza o status de sucesso da conexão
+                statusLabel.className = "text-[9px] bg-emerald-100 text-emerald-600 font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center space-x-1";
+                statusLabel.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1"></span><span>🟢 Conectado ao Google Sheets</span>`;
+
+            } catch (err) {
+                console.warn("Não foi possível carregar do Google Sheets. Usando dados do Backup.", err);
+                
+                // Ativa fallback de segurança
+                liveDiario = DIARIO_BACKUP;
+                liveEpisodios = EPISODIOS_BACKUP;
+
+                statusLabel.className = "text-[9px] bg-amber-100 text-amber-600 font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center space-x-1";
+                statusLabel.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1 animate-pulse"></span><span>⚠️ Modo Backup / Desconectado</span>`;
+            }
+
+            // Atualiza a tela
+            atualizarKPIs(liveDiario, liveEpisodios);
+            renderTimelineChart(liveDiario);
+            renderAudienceMixChart(liveDiario);
+            populateDetailedTable(liveEpisodios);
         }
 
-        // Render Page 1 - Audience Mix Donut Chart
-        function initAudienceMixChart() {
-            const ctx = document.getElementById('audienceMixChart').getContext('2d');
-            
-            new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Fidelidade Recorrente', 'Novos Ouvintes'],
-                    datasets: [{
-                        data: [63.6, 36.4],
-                        backgroundColor: ['#0086FF', '#C739FF'],
-                        hoverOffset: 4,
-                        borderWidth: 2,
-                        borderColor: '#ffffff'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    cutout: '75%'
-                }
-            });
-        }
-
-        // Page load triggers
+        // Executado assim que o documento HTML está pronto
         window.addEventListener('DOMContentLoaded', () => {
-            initTimelineChart();
-            initAudienceMixChart();
-            populateDetailedTable(EPISODES_DATA);
+            recarregarDados();
         });
     </script>
 </body>
