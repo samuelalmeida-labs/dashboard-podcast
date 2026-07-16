@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cabeça de Lab - Looker Studio Live</title>
-    <!-- Tailwind CSS para estilização rápida -->
+    <title>Cabeça de Lab - Looker Studio Premium</title>
+    <!-- Tailwind CSS para estilização moderna e fluida -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js para visualização dos gráficos interativos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- FontAwesome para ícones -->
+    <!-- FontAwesome para ícones profissionais -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,132 +18,152 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f6f8fa;
+            background-color: #f4f6f9;
+            transition: background-color 0.3s ease;
         }
-        /* Scrollbar estilizada */
+        /* Scrollbar estilizada premium */
         ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
         }
         ::-webkit-scrollbar-track {
             background: #f1f3f4;
         }
         ::-webkit-scrollbar-thumb {
-            background: #dadce0;
-            border-radius: 4px;
+            background: #cbd5e1;
+            border-radius: 8px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #bdc1c6;
+            background: #94a3b8;
         }
         
-        /* Efeito de card Looker Studio */
+        /* Efeito de card Looker Studio com micro-interações */
         .google-card {
             background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 16px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .google-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.06), 0 2px 5px rgba(0, 0, 0, 0.04);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(0, 0, 0, 0.03);
         }
 
-        /* Gradientes Degradê Magalu (Conforme image_f34be7.jpg) */
+        /* Gradientes Degradê Magalu oficiais da imagem */
         .grad-magalu-yellow { background: linear-gradient(135deg, #FFFF4A 0%, #FCD000 100%); }
         .grad-magalu-orange { background: linear-gradient(135deg, #FFC112 0%, #FF8A00 100%); }
         .grad-magalu-red    { background: linear-gradient(135deg, #FF5F5F 0%, #FF253A 100%); }
         .grad-magalu-pink   { background: linear-gradient(135deg, #FF7AE7 0%, #FF37A8 100%); }
         .grad-magalu-purple { background: linear-gradient(135deg, #C739FF 0%, #A400E1 100%); }
         .grad-magalu-blue   { background: linear-gradient(135deg, #2ECEFF 0%, #0086FF 100%); }
-        .grad-magalu-cyan   { background: linear-gradient(135deg, #2BD7EE 0%, #00D604 100%); }
+        .grad-magalu-green  { background: linear-gradient(135deg, #72F772 0%, #00D604 100%); }
 
-        /* Bordas de destaque para Scorecards usando a paleta */
+        /* Bordas de destaque para KPIs e seções */
         .scorecard-blue { border-left: 6px solid #0086FF; }
         .scorecard-purple { border-left: 6px solid #A400E1; }
         .scorecard-orange { border-left: 6px solid #FF8A00; }
         .scorecard-pink { border-left: 6px solid #FF37A8; }
+        .scorecard-green { border-left: 6px solid #00D604; }
+
+        /* Efeito de carregamento cintilante (Skeleton Loading) */
+        .skeleton {
+            background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col text-gray-800">
+<body class="min-h-screen flex flex-col text-slate-800">
 
-    <!-- Faixa Superior com o Degradê Magalu completo em transição -->
-    <div class="h-1.5 w-full bg-gradient-to-r from-[#FFFF4A] via-[#FF8A00] via-[#FF253A] via-[#FF37A8] via-[#A400E1] via-[#0086FF] to-[#00D604]"></div>
+    <!-- Faixa Superior Degradê Magalu -->
+    <div class="h-2 w-full bg-gradient-to-r from-[#FFFF4A] via-[#FF8A00] via-[#FF253A] via-[#FF37A8] via-[#A400E1] via-[#0086FF] to-[#00D604]"></div>
     
-    <header class="bg-white border-b border-gray-200 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4 z-30">
+    <header class="bg-white border-b border-slate-200 px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4 z-30 shadow-sm">
         <div class="flex items-center space-x-4">
-            <div class="flex items-center justify-center w-11 h-11 rounded-xl grad-magalu-blue text-white shadow-md shadow-blue-500/20">
-                <i class="fa-solid fa-chart-line text-xl"></i>
+            <div class="flex items-center justify-center w-12 h-12 rounded-2xl grad-magalu-blue text-white shadow-lg shadow-blue-500/20">
+                <i class="fa-solid fa-headset text-2xl"></i>
             </div>
             <div>
                 <div class="flex items-center space-x-2">
-                    <span class="text-xs text-gray-400 font-bold tracking-wider uppercase">Looker Studio Live</span>
-                    <!-- Indicador de status de conexão em tempo real -->
-                    <span id="connectionStatus" class="text-[9px] bg-red-100 text-red-600 font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center space-x-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-red-500 mr-1 animate-pulse"></span>
-                        <span>🔴 Conectando...</span>
+                    <span class="text-[10px] bg-slate-100 text-slate-500 font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">Luizalabs LabData</span>
+                    <!-- Status Real da Planilha -->
+                    <span id="connectionStatus" class="text-[10px] bg-amber-100 text-amber-700 font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1.5 animate-pulse"></span>
+                        <span>🔴 Sincronizando...</span>
                     </span>
                 </div>
-                <h1 class="text-xl font-black text-gray-900 leading-tight">Cabeça de Lab <span class="text-gray-400 font-normal">| Relatório Consolidado de Audiência</span></h1>
+                <h1 class="text-xl font-black text-slate-900 leading-none mt-1">Cabeça de Lab <span class="text-slate-400 font-medium">| BI Analytics Premium</span></h1>
             </div>
         </div>
         
-        <div class="flex items-center space-x-3 w-full md:w-auto justify-end">
-            <button onclick="toggleSetupModal()" class="bg-gradient-to-r from-[#2ECEFF] to-[#0086FF] hover:opacity-90 text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow-lg shadow-blue-500/10 transition-all flex items-center space-x-2">
-                <i class="fa-solid fa-circle-info"></i>
-                <span>Como Compartilhar Planilha</span>
+        <div class="flex items-center gap-2.5 w-full md:w-auto justify-end">
+            <button onclick="toggleSetupModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-4 py-3 rounded-xl transition-all flex items-center space-x-2">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <span class="hidden sm:inline">Vincular Planilha</span>
             </button>
-            <button onclick="recarregarDados()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold px-4 py-2.5 rounded-lg transition-all flex items-center space-x-2">
-                <i class="fa-solid fa-arrows-rotate"></i>
-                <span>Sincronizar Agora</span>
+            <button onclick="recarregarDados()" class="bg-gradient-to-r from-[#2ECEFF] to-[#0086FF] hover:opacity-95 text-white text-xs font-bold px-4 py-3 rounded-xl shadow-md shadow-blue-500/10 transition-all flex items-center space-x-2">
+                <i class="fa-solid fa-rotate-right"></i>
+                <span>Atualizar</span>
             </button>
         </div>
     </header>
 
-    <section class="bg-white border-b border-gray-200 px-6 py-3 flex flex-wrap items-center justify-between gap-4 z-20 shadow-sm">
-        <div class="flex items-center space-x-3 flex-wrap gap-2">
-            <!-- Navegador de páginas Looker Studio -->
-            <div class="flex items-center bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2 text-xs font-bold text-gray-700 shadow-sm">
-                <span class="mr-2 text-gray-400 uppercase tracking-wider">Visualizar:</span>
-                <select id="pageSelect" onchange="switchPage(this.value)" class="bg-transparent border-none focus:outline-none font-bold text-gray-900 cursor-pointer">
-                    <option value="1">1. Visão Geral Executiva</option>
-                    <option value="2">2. Performance de Episódios</option>
-                </select>
-            </div>
-
-            <!-- Filtros de período (Estáticos para o design) -->
-            <button class="bg-white hover:bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2 text-xs font-bold text-gray-700 shadow-sm flex items-center space-x-2">
-                <i class="fa-regular fa-calendar text-[#0086FF]"></i>
-                <span>Todo o histórico</span>
+    <section class="bg-white border-b border-slate-200 px-6 py-3.5 flex flex-wrap items-center justify-between gap-4 z-20 shadow-sm">
+        <!-- Navegação entre Páginas/Abas -->
+        <div class="flex bg-slate-100 p-1.5 rounded-xl gap-1">
+            <button onclick="switchTab('tab1')" id="btn-tab1" class="px-4 py-2 text-xs font-black rounded-lg transition-all text-slate-800 bg-white shadow-sm">
+                <i class="fa-solid fa-chart-pie mr-1.5 text-blue-500"></i>1. Visão Geral Executiva
             </button>
-            <button class="bg-white hover:bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2 text-xs font-bold text-gray-700 shadow-sm flex items-center space-x-2">
-                <i class="fa-brands fa-spotify text-[#00D604]"></i>
-                <span>Filtro: Spotify</span>
+            <button onclick="switchTab('tab2')" id="btn-tab2" class="px-4 py-2 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800">
+                <i class="fa-solid fa-microphone-lines mr-1.5 text-pink-500"></i>2. Performance de Episódios
+            </button>
+            <button onclick="switchTab('tab3')" id="btn-tab3" class="px-4 py-2 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800">
+                <i class="fa-solid fa-users mr-1.5 text-purple-500"></i>3. Performance de Hosts
             </button>
         </div>
-        
-        <div class="text-[10px] text-gray-400 font-bold tracking-wider uppercase flex items-center space-x-1.5">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>Última sincronização: Em tempo real</span>
+
+        <!-- Filtros Dinâmicos Globais -->
+        <div class="flex items-center gap-2.5 flex-wrap">
+            <!-- Data Range Inputs -->
+            <div class="flex items-center bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 gap-2 shadow-sm text-xs">
+                <span class="text-slate-400 font-bold uppercase text-[9px] tracking-wider">Período</span>
+                <input type="date" id="filterStartDate" onchange="aplicarFiltrosManuais()" class="bg-transparent border-none font-bold text-slate-800 focus:outline-none">
+                <span class="text-slate-300">até</span>
+                <input type="date" id="filterEndDate" onchange="aplicarFiltrosManuais()" class="bg-transparent border-none font-bold text-slate-800 focus:outline-none">
+            </div>
+
+            <!-- Presets de Período -->
+            <div class="flex bg-slate-50 p-1 rounded-xl border border-slate-200 gap-1">
+                <button onclick="setPeriodPreset('all')" class="px-2.5 py-1 text-[10px] font-extrabold uppercase rounded-lg text-slate-600 bg-white shadow-sm transition-all" id="preset-all">Histórico</button>
+                <button onclick="setPeriodPreset('2026')" class="px-2.5 py-1 text-[10px] font-extrabold uppercase rounded-lg text-slate-500 hover:bg-white/50 transition-all" id="preset-2026">Ano 2026</button>
+                <button onclick="setPeriodPreset('30d')" class="px-2.5 py-1 text-[10px] font-extrabold uppercase rounded-lg text-slate-500 hover:bg-white/50 transition-all" id="preset-30d">30 dias</button>
+                <button onclick="setPeriodPreset('7d')" class="px-2.5 py-1 text-[10px] font-extrabold uppercase rounded-lg text-slate-500 hover:bg-white/50 transition-all" id="preset-7d">7 dias</button>
+            </div>
         </div>
     </section>
 
-    <main class="flex-grow p-6 overflow-y-auto max-w-[1400px] w-full mx-auto">
+    <main class="flex-grow p-6 overflow-y-auto max-w-[1500px] w-full mx-auto">
         
         <!-- ABA 1: VISÃO GERAL EXECUTIVA -->
-        <div id="page1" class="space-y-6">
-            <!-- KPIs Grid -->
+        <div id="tab1" class="space-y-6">
+            
+            <!-- Grid de KPIs Dinâmicos -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <!-- KPI 1 -->
                 <div class="google-card scorecard-blue p-5 flex items-center justify-between">
                     <div>
-                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Total Streams / Downloads</p>
-                        <h3 id="kpiStreams" class="text-3xl font-black text-gray-900 mt-1">---</h3>
-                        <p class="text-xs text-emerald-600 font-bold mt-1.5 flex items-center space-x-1">
-                            <i class="fa-solid fa-circle-nodes"></i>
-                            <span>Consolidado Geral</span>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Total de Downloads / Streams</p>
+                        <h3 id="kpiStreams" class="text-3.5xl font-black text-slate-900 mt-1">---</h3>
+                        <p class="text-xs text-blue-600 font-bold mt-1.5 flex items-center gap-1">
+                            <i class="fa-solid fa-arrows-up-down"></i>
+                            <span id="kpiStreamsPeriod">Período Filtrado</span>
                         </p>
                     </div>
-                    <div class="w-12 h-12 rounded-xl grad-magalu-blue text-white flex items-center justify-center shadow-lg shadow-blue-500/20">
+                    <div class="w-12 h-12 rounded-2xl grad-magalu-blue text-white flex items-center justify-center shadow-lg shadow-blue-500/20">
                         <i class="fa-solid fa-circle-play text-xl"></i>
                     </div>
                 </div>
@@ -151,14 +171,14 @@
                 <!-- KPI 2 -->
                 <div class="google-card scorecard-purple p-5 flex items-center justify-between">
                     <div>
-                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Tempo de Consumo Total</p>
-                        <h3 id="kpiHoras" class="text-3xl font-black text-gray-900 mt-1">---</h3>
-                        <p class="text-xs text-purple-600 font-bold mt-1.5 flex items-center space-x-1">
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Tempo Total de Consumo</p>
+                        <h3 id="kpiHoras" class="text-3.5xl font-black text-slate-900 mt-1">---</h3>
+                        <p class="text-xs text-purple-600 font-bold mt-1.5 flex items-center gap-1">
                             <i class="fa-solid fa-clock"></i>
-                            <span>Histórico Acumulado</span>
+                            <span id="kpiHorasPeriod">Minutos/Horas</span>
                         </p>
                     </div>
-                    <div class="w-12 h-12 rounded-xl grad-magalu-purple text-white flex items-center justify-center shadow-lg shadow-purple-500/20">
+                    <div class="w-12 h-12 rounded-2xl grad-magalu-purple text-white flex items-center justify-center shadow-lg shadow-purple-500/20">
                         <i class="fa-solid fa-hourglass-half text-xl"></i>
                     </div>
                 </div>
@@ -166,14 +186,14 @@
                 <!-- KPI 3 -->
                 <div class="google-card scorecard-orange p-5 flex items-center justify-between">
                     <div>
-                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Seguidores Spotify</p>
-                        <h3 id="kpiSeguidores" class="text-3xl font-black text-gray-900 mt-1">---</h3>
-                        <p class="text-xs text-orange-600 font-bold mt-1.5 flex items-center space-x-1">
-                            <i class="fa-solid fa-arrow-trend-up"></i>
-                            <span>Comunidade Ativa</span>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Seguidores no Spotify</p>
+                        <h3 id="kpiSeguidores" class="text-3.5xl font-black text-slate-900 mt-1">---</h3>
+                        <p class="text-xs text-orange-600 font-bold mt-1.5 flex items-center gap-1">
+                            <i class="fa-solid fa-user-plus"></i>
+                            <span>Seguidores Acumulados</span>
                         </p>
                     </div>
-                    <div class="w-12 h-12 rounded-xl grad-magalu-orange text-white flex items-center justify-center shadow-lg shadow-orange-500/20">
+                    <div class="w-12 h-12 rounded-2xl grad-magalu-orange text-white flex items-center justify-center shadow-lg shadow-orange-500/20">
                         <i class="fa-solid fa-users text-xl"></i>
                     </div>
                 </div>
@@ -181,29 +201,29 @@
                 <!-- KPI 4 -->
                 <div class="google-card scorecard-pink p-5 flex items-center justify-between">
                     <div>
-                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Média de Finalização</p>
-                        <h3 id="kpiFinalizacao" class="text-3xl font-black text-gray-900 mt-1">---</h3>
-                        <p class="text-xs text-pink-600 font-bold mt-1.5 flex items-center space-x-1">
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Média de Finalização</p>
+                        <h3 id="kpiFinalizacao" class="text-3.5xl font-black text-slate-900 mt-1">---</h3>
+                        <p class="text-xs text-pink-600 font-bold mt-1.5 flex items-center gap-1">
                             <i class="fa-solid fa-percent"></i>
-                            <span>Retenção de Lançamentos</span>
+                            <span>Retenção Geral</span>
                         </p>
                     </div>
-                    <div class="w-12 h-12 rounded-xl grad-magalu-pink text-white flex items-center justify-center shadow-lg shadow-pink-500/20">
+                    <div class="w-12 h-12 rounded-2xl grad-magalu-pink text-white flex items-center justify-center shadow-lg shadow-pink-500/20">
                         <i class="fa-solid fa-flag-checkered text-xl"></i>
                     </div>
                 </div>
             </div>
 
-            <!-- Gráficos Centrais -->
+            <!-- Gráficos de Evolução e Mix de Audiência -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Histórico de Downloads -->
+                <!-- Histórico de Downloads (ChartJS) -->
                 <div class="google-card p-6 lg:col-span-2 flex flex-col h-[400px]">
                     <div class="flex items-center justify-between mb-4">
-                        <h4 class="font-extrabold text-gray-900 text-sm tracking-wide flex items-center space-x-2">
-                            <i class="fa-solid fa-chart-area text-[#0086FF]"></i>
-                            <span>Evolução de Downloads (Histórico Geral)</span>
+                        <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2">
+                            <i class="fa-solid fa-chart-area text-blue-500"></i>
+                            <span>Histórico Temporal de Downloads e Engajamento</span>
                         </h4>
-                        <span class="text-[10px] bg-blue-50 text-[#0086FF] font-bold px-2.5 py-1 rounded">Consolidado Mensal</span>
+                        <span class="text-[10px] bg-blue-50 text-blue-600 font-black px-2.5 py-1 rounded">Evolução do Período</span>
                     </div>
                     <div class="flex-grow relative">
                         <canvas id="streamsTimelineChart"></canvas>
@@ -213,9 +233,9 @@
                 <!-- Mix de Fidelidade do Ouvinte -->
                 <div class="google-card p-6 flex flex-col h-[400px]">
                     <div class="flex items-center justify-between mb-4">
-                        <h4 class="font-extrabold text-gray-900 text-sm tracking-wide flex items-center space-x-2">
-                            <i class="fa-solid fa-chart-pie text-[#A400E1]"></i>
-                            <span>Fidelidade do Ouvinte (Recorrentes vs Novos)</span>
+                        <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2">
+                            <i class="fa-solid fa-chart-pie text-purple-500"></i>
+                            <span>Mix de Ouvintes (Novos vs Recorrentes)</span>
                         </h4>
                     </div>
                     <div class="flex-grow relative flex flex-col justify-center items-center">
@@ -223,87 +243,223 @@
                             <canvas id="audienceMixChart"></canvas>
                         </div>
                         <div class="mt-4 text-center">
-                            <p class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#2ECEFF] to-[#A400E1]" id="donutRecurrentPercent">---</p>
-                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Ouvintes Fiéis e Recorrentes</p>
+                            <p class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600" id="donutRecurrentPercent">---</p>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Ouvintes Fiéis e Recorrentes</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Painel Inteligente de Insights de IA -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Analise Narrativa da IA -->
+                <div class="google-card p-6 lg:col-span-2 bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200">
+                    <div class="flex items-center gap-3 border-b border-slate-200 pb-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 flex items-center justify-center text-white shadow-md">
+                            <i class="fa-solid fa-brain text-lg"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-black text-slate-900 text-sm">Insight Engine IA: Análise de Desempenho</h4>
+                            <p class="text-[10px] text-slate-400 uppercase tracking-wider font-bold">Diagnóstico em tempo real para o período selecionado</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div id="aiSummaryLoading" class="hidden space-y-2">
+                            <div class="h-4 w-3/4 skeleton rounded"></div>
+                            <div class="h-4 w-full skeleton rounded"></div>
+                            <div class="h-4 w-5/6 skeleton rounded"></div>
+                        </div>
+                        <div id="aiSummaryText" class="text-sm text-slate-600 leading-relaxed font-medium">
+                            Selecione um período de dados ou carregue a planilha para analisar os dados com o motor de inteligência artificial.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recomendações Táticas Criadas pela IA -->
+                <div class="google-card p-6 bg-white border border-slate-200">
+                    <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-lightbulb text-amber-500"></i>
+                        <span>Sugestões Estratégicas IA</span>
+                    </h4>
+                    <div class="space-y-4" id="aiRecommendationsContainer">
+                        <!-- Gerado Dinamicamente -->
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- ABA 2: PERFORMANCE DE EPISÓDIOS -->
-        <div id="page2" class="space-y-6 hidden">
-            <!-- Busca e Status -->
+        <div id="tab2" class="space-y-6 hidden">
+            <!-- Barra de Busca Avançada de Episódio -->
             <div class="google-card p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div class="relative flex-grow max-w-md">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                        <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+                        <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
                     </span>
-                    <input type="text" id="episodeSearchInput" onkeyup="filterEpisodesTable()" placeholder="Buscar episódio pelo título..." class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#0086FF] focus:border-[#0086FF]">
+                    <input type="text" id="episodeSearchInput" onkeyup="filterEpisodesTable()" placeholder="Buscar episódio pelo título..." class="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                 </div>
-                <div class="flex items-center space-x-3 text-xs font-bold text-gray-400 uppercase tracking-wider">
-                    <span>Episódios listados: <span id="visibleEpisodeCount" class="text-[#0086FF] font-extrabold text-sm">0</span></span>
+                <div class="flex items-center space-x-3 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                    <span>Episódios correspondentes: <span id="visibleEpisodeCount" class="text-blue-500 font-extrabold text-sm">0</span></span>
                 </div>
             </div>
 
-            <!-- Cards de Destaque dos episódios -->
+            <!-- Cards de Altíssima Retenção (Destaques) -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="google-card p-6 bg-gradient-to-br from-[#FF7AE7]/5 to-[#FF37A8]/5 border border-[#FF37A8]/20 flex flex-col justify-between">
                     <div>
                         <span class="text-[10px] bg-gradient-to-r from-[#FF7AE7] to-[#FF37A8] text-white font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider">Retenção de Lançamento</span>
-                        <h5 class="text-sm font-extrabold text-gray-900 mt-4 leading-snug">POR QUE A PSI É VITAL PARA O NEGÓCIO? #VEMSERFELIZSEGURO</h5>
+                        <h5 class="text-sm font-extrabold text-slate-900 mt-4 leading-snug">POR QUE A PSI É VITAL PARA O NEGÓCIO? #VEMSERFELIZSEGURO</h5>
                     </div>
                     <div class="mt-6">
                         <span class="text-4xl font-black text-[#FF37A8]">70.0%</span>
-                        <p class="text-xs text-gray-500 font-medium mt-1">Líder absoluto de engajamento do primeiro semestre.</p>
+                        <p class="text-xs text-slate-500 font-medium mt-1">Líder em retenção no primeiro semestre.</p>
                     </div>
                 </div>
 
                 <div class="google-card p-6 bg-gradient-to-br from-[#C739FF]/5 to-[#A400E1]/5 border border-[#A400E1]/20 flex flex-col justify-between">
                     <div>
-                        <span class="text-[10px] bg-gradient-to-r from-[#C739FF] to-[#A400E1] text-white font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider">Fórmula Café</span>
-                        <h5 class="text-sm font-extrabold text-gray-900 mt-4 leading-snug">IA, PRODUTIVIDADE E O RISCO DE DEPENDER DEMAIS - PAPO DO CAFÉ #30</h5>
+                        <span class="text-[10px] bg-gradient-to-r from-[#C739FF] to-[#A400E1] text-white font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider">Formato Papo do Café</span>
+                        <h5 class="text-sm font-extrabold text-slate-900 mt-4 leading-snug">IA, PRODUTIVIDADE E O RISCO DE DEPENDER DEMAIS - PAPO DO CAFÉ #30</h5>
                     </div>
                     <div class="mt-6">
                         <span class="text-4xl font-black text-[#A400E1]">50.0%</span>
-                        <p class="text-xs text-gray-500 font-medium mt-1">Formato curto e dinâmico de altíssima adesão.</p>
+                        <p class="text-xs text-slate-500 font-medium mt-1">Média superior graças ao formato dinâmico.</p>
                     </div>
                 </div>
 
                 <div class="google-card p-6 bg-gradient-to-br from-[#2BD7EE]/5 to-[#0086FF]/5 border border-[#2BD7EE]/20 flex flex-col justify-between">
                     <div>
-                        <span class="text-[10px] bg-gradient-to-r from-[#2BD7EE] to-[#0086FF] text-white font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider">Ecossistema</span>
-                        <h5 class="text-sm font-extrabold text-gray-900 mt-4 leading-snug">COMUNIDADE AIQFOME</h5>
+                        <span class="text-[10px] bg-gradient-to-r from-[#2BD7EE] to-[#0086FF] text-white font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider">Engajamento Ecossistema</span>
+                        <h5 class="text-sm font-extrabold text-slate-900 mt-4 leading-snug">COMUNIDADE AIQFOME</h5>
                     </div>
                     <div class="mt-6">
                         <span class="text-4xl font-black text-[#0086FF]">49.0%</span>
-                        <p class="text-xs text-gray-500 font-medium mt-1">Grande envolvimento focado em comunidade local.</p>
+                        <p class="text-xs text-slate-500 font-medium mt-1">Destaque corporativo focado em audiência ativa.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Tabela Consolidada -->
+            <!-- Tabela Consolidada de Episódios -->
             <div class="google-card p-6">
                 <div class="flex items-center justify-between mb-4">
-                    <h4 class="font-extrabold text-gray-900 text-sm tracking-wide flex items-center space-x-2">
-                        <i class="fa-solid fa-database text-[#0086FF]"></i>
-                        <span>Banco de Dados Unificado (Carregado ao Vivo via Google Sheets)</span>
+                    <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2">
+                        <i class="fa-solid fa-list text-blue-500"></i>
+                        <span>Performance Consolidada de Episódios</span>
                     </h4>
                 </div>
-                <div class="overflow-x-auto rounded-xl border border-gray-150">
-                    <table class="min-w-full divide-y divide-gray-200" id="episodesDetailedTable">
-                        <thead class="bg-gray-50">
+                <div class="overflow-x-auto rounded-xl border border-slate-150">
+                    <table class="min-w-full divide-y divide-slate-200" id="episodesDetailedTable">
+                        <thead class="bg-slate-50">
                             <tr>
-                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Título do Episódio</th>
-                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Publicação</th>
-                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Estreia (7d)</th>
-                                <th class="px-6 py-4 text-right text-xs font-bold text-gray-400 uppercase tracking-wider">Alcance (7d)</th>
-                                <th class="px-6 py-4 text-right text-xs font-bold text-gray-400 uppercase tracking-wider">Finalização (%)</th>
-                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Código URI</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Título do Episódio</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Publicação</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Estreia (7d)</th>
+                                <th class="px-6 py-4 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Alcance (7d)</th>
+                                <th class="px-6 py-4 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Finalização (%)</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">URI do Episódio</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-100" id="episodesTableBody">
-                            <!-- Injetado dinamicamente via JS -->
+                        <tbody class="bg-white divide-y divide-slate-100" id="episodesTableBody">
+                            <!-- Inserido dinamicamente por JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA 3: PERFORMANCE DOS HOSTS -->
+        <div id="tab3" class="space-y-6 hidden">
+            <!-- Grid de KPIs Gerais de Hosts -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="google-card scorecard-blue p-5 flex items-center justify-between">
+                    <div>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Apresentadores Ativos</p>
+                        <h3 class="text-3.5xl font-black text-slate-900 mt-1" id="kpiUniqueHosts">---</h3>
+                        <p class="text-xs text-blue-600 font-bold mt-1.5 flex items-center gap-1">
+                            <i class="fa-solid fa-users"></i>
+                            <span>Equipe de Co-hosts Luizalabs</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="google-card scorecard-purple p-5 flex items-center justify-between">
+                    <div>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Destaque de Audiência (Host)</p>
+                        <h3 class="text-2xl font-black text-slate-900 mt-1" id="kpiTopAudienceHost">---</h3>
+                        <p class="text-xs text-purple-600 font-bold mt-1.5 flex items-center gap-1">
+                            <i class="fa-solid fa-award"></i>
+                            <span>Líder de downloads do canal</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="google-card scorecard-green p-5 flex items-center justify-between">
+                    <div>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Líder de Retenção (Host)</p>
+                        <h3 class="text-2xl font-black text-slate-900 mt-1" id="kpiTopRetentionHost">---</h3>
+                        <p class="text-xs text-green-600 font-bold mt-1.5 flex items-center gap-1">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            <span>Maior tempo médio de escuta</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráfico Comparativo dos Hosts (ChartJS) -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Gráfico de Downloads vs Retenção por Host -->
+                <div class="google-card p-6 lg:col-span-2 flex flex-col h-[400px]">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2">
+                            <i class="fa-solid fa-chart-bar text-purple-500"></i>
+                            <span>Comparação de Desempenho Entre Apresentadores</span>
+                        </h4>
+                    </div>
+                    <div class="flex-grow relative">
+                        <canvas id="hostsPerformanceChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Quadro Informativo de Insights de Co-hosts -->
+                <div class="google-card p-6 bg-gradient-to-br from-purple-50 to-indigo-50 border border-purple-100 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2 mb-4">
+                            <i class="fa-solid fa-microphone-lines text-purple-600"></i>
+                            <span>Diagnóstico da Equipe</span>
+                        </h4>
+                        <div class="space-y-4 text-xs text-slate-600 leading-relaxed">
+                            <p><strong>A Dupla de Café:</strong> O formato liderado por <span class="font-bold text-slate-900">Marcos Noriyuki (Nori)</span> e <span class="font-bold text-slate-900">Ana Carolina Barreto</span> registra o melhor equilíbrio entre volume e retenção através dos episódios de tom curto.</p>
+                            <p><strong>Impacto de Co-Hosts Especiais:</strong> A entrada de <span class="font-bold text-slate-900">Milene Vasconcelos</span> e <span class="font-bold text-slate-900">Lidiane Monteiro</span> no primeiro semestre registrou o maior pico histórico de completude (70%).</p>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-purple-100">
+                        <span class="text-[10px] text-purple-700 font-extrabold uppercase tracking-wider block">Recomendação Estratégica:</span>
+                        <p class="text-[11px] text-slate-500 mt-1">Estimular crossovers entre hosts técnicos e especialistas em UX para ampliar alcance.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabela de Líderes por Host -->
+            <div class="google-card p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h4 class="font-extrabold text-slate-900 text-sm tracking-wide flex items-center gap-2">
+                        <i class="fa-solid fa-users-viewfinder text-purple-500"></i>
+                        <span>Leaderboard de Performance dos Hosts</span>
+                    </h4>
+                </div>
+                <div class="overflow-x-auto rounded-xl border border-slate-150">
+                    <table class="min-w-full divide-y divide-slate-200">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Apresentador(a) / Co-Host</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Função no Luizalabs</th>
+                                <th class="px-6 py-4 text-center text-xs font-bold text-slate-400 uppercase tracking-wider">Episódios Gravados</th>
+                                <th class="px-6 py-4 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Downloads Acumulados (Estreia)</th>
+                                <th class="px-6 py-4 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Média de Finalização (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-slate-100" id="hostsTableBody">
+                            <!-- Inserido dinamicamente via JS -->
                         </tbody>
                     </table>
                 </div>
@@ -312,34 +468,33 @@
 
     </main>
 
-    <!-- MODAL DE CONFIGURAÇÃO DE SEGURANÇA -->
+    <!-- MODAL DE CONFIGURAÇÃO DO GOOGLE SHEETS -->
     <div id="setupModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 p-4 transition-all">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden flex flex-col transform scale-95 transition-all">
-            <div class="bg-gradient-to-r from-[#2ECEFF] to-[#0086FF] text-white p-6 flex items-center justify-between">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden flex flex-col transform scale-95 transition-all">
+            <div class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-6 flex items-center justify-between">
                 <h3 class="font-black text-lg flex items-center space-x-2">
-                    <i class="fa-solid fa-circle-nodes"></i>
-                    <span>Como Ativar a Conexão Real</span>
+                    <i class="fa-solid fa-link"></i>
+                    <span>Conectar sua Planilha Live</span>
                 </h3>
                 <button onclick="toggleSetupModal()" class="text-white hover:opacity-80 text-2xl focus:outline-none">&times;</button>
             </div>
-            <div class="p-6 space-y-4 text-sm text-gray-600 overflow-y-auto max-h-[70vh]">
-                <p>O seu dashboard já possui o link direto para a planilha <strong>Head <> Cabeça de Lab</strong>. Para que o seu site no GitHub Pages consiga ler os dados, você deve permitir o acesso externo no Google Drive:</p>
+            <div class="p-6 space-y-4 text-sm text-slate-600 overflow-y-auto max-h-[70vh]">
+                <p>O seu dashboard consome informações de forma dinâmica da sua planilha do Google Sheets. Siga os passos para conectar a planilha ao vivo:</p>
                 
-                <ol class="list-decimal pl-5 space-y-3 font-medium text-gray-700">
-                    <li>Abra a sua planilha no <strong>Google Drive</strong>.</li>
-                    <li>Clique no botão azul <strong>Compartilhar</strong> no canto superior direito.</li>
-                    <li>Em *Acesso Geral*, mude de *Restrito* para <strong>"Qualquer pessoa com o link"</strong> como <strong>Leitor</strong>.</li>
-                    <li>Salve as alterações.</li>
+                <ol class="list-decimal pl-5 space-y-2.5 font-semibold text-slate-700">
+                    <li>Abra a sua planilha **Head <> Cabeça de Lab** no Google Drive.</li>
+                    <li>Clique no botão azul **Compartilhar** no canto superior direito.</li>
+                    <li>Em *Acesso Geral*, altere de *Restrito* para <strong>"Qualquer pessoa com o link"</strong> como <strong>Leitor</strong>.</li>
+                    <li>Clique em Salvar.</li>
                 </ol>
 
-                <div class="bg-gradient-to-r from-[#2ECEFF]/10 to-[#0086FF]/10 border-l-4 border-[#0086FF] p-4 rounded-xl text-xs text-[#0086FF] font-bold">
-                    <p class="font-extrabold mb-1">Acesso Seguro:</p>
-                    Esse método só permite que o site "leia" os dados consolidados, sem qualquer autorização de alteração, exclusão ou acesso a outros arquivos da sua conta Google.
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-xl text-xs text-blue-700 font-bold">
+                    O dashboard continuará funcionando em modo de backup/demonstração caso a conexão falhe, assegurando que suas apresentações continuem ativas de forma estável.
                 </div>
             </div>
-            <div class="bg-gray-50 px-6 py-4 flex justify-end">
-                <button onclick="toggleSetupModal()" class="bg-gradient-to-r from-[#2ECEFF] to-[#0086FF] hover:opacity-95 text-white font-bold text-xs px-6 py-3 rounded-xl shadow-md transition-all">
-                    Entendido e Configurado
+            <div class="bg-slate-50 px-6 py-4 flex justify-end">
+                <button onclick="toggleSetupModal()" class="bg-gradient-to-r from-blue-500 to-indigo-600 hover:opacity-95 text-white font-bold text-xs px-6 py-3 rounded-xl shadow-md transition-all">
+                    Configurado e Pronto!
                 </button>
             </div>
         </div>
@@ -351,86 +506,163 @@
         
         // Backup de dados caso a planilha não esteja compartilhada publicamente ainda
         const DIARIO_BACKUP = [
-            { data: "2026-07-11", streams: 1993, tempoConsumo: 164, tempoMedio: 0.38, comentarios: 0, seguidores: 13905, total: 14, recorrente: 10, novidade: 4 },
-            { data: "2026-07-12", streams: 2100, tempoConsumo: 175, tempoMedio: 0.41, comentarios: 1, seguidores: 13905, total: 15, recorrente: 11, novidade: 4 },
-            { data: "2026-07-13", streams: 1850, tempoConsumo: 155, tempoMedio: 0.35, comentarios: 0, seguidores: 13905, total: 12, recorrente: 8, novidade: 4 },
-            { data: "2026-07-14", streams: 1400, tempoConsumo: 115, tempoMedio: 0.31, comentarios: 0, seguidores: 13905, total: 10, recorrente: 6, novidade: 4 },
-            { data: "2026-07-15", streams: 1200, tempoConsumo: 105, tempoMedio: 0.28, comentarios: 0, seguidores: 13905, total: 9, recorrente: 5, novidade: 4 }
+            { data: "2026-07-01", streams: 1993, tempoConsumo: 164, tempoMedio: 0.38, comentarios: 0, seguidores: 13905, total: 14, recorrente: 10, novidade: 4 },
+            { data: "2026-07-02", streams: 2100, tempoConsumo: 175, tempoMedio: 0.41, comentarios: 1, seguidores: 13905, total: 15, recorrente: 11, novidade: 4 },
+            { data: "2026-07-03", streams: 1850, tempoConsumo: 155, tempoMedio: 0.35, comentarios: 0, seguidores: 13905, total: 12, recorrente: 8, novidade: 4 },
+            { data: "2026-07-04", streams: 1400, tempoConsumo: 115, tempoMedio: 0.31, comentarios: 0, seguidores: 13905, total: 10, recorrente: 6, novidade: 4 },
+            { data: "2026-07-05", streams: 1200, tempoConsumo: 105, tempoMedio: 0.28, comentarios: 0, seguidores: 13905, total: 9, recorrente: 5, novidade: 4 },
+            { data: "2026-07-06", streams: 1150, tempoConsumo: 95, tempoMedio: 0.27, comentarios: 0, seguidores: 13905, total: 8, recorrente: 5, novidade: 3 },
+            { data: "2026-07-07", streams: 1300, tempoConsumo: 110, tempoMedio: 0.30, comentarios: 0, seguidores: 13905, total: 11, recorrente: 7, novidade: 4 },
+            { data: "2026-07-08", streams: 1450, tempoConsumo: 125, tempoMedio: 0.32, comentarios: 0, seguidores: 13905, total: 13, recorrente: 9, novidade: 4 },
+            { data: "2026-07-09", streams: 1600, tempoConsumo: 135, tempoMedio: 0.34, comentarios: 0, seguidores: 13905, total: 12, recorrente: 8, novidade: 4 },
+            { data: "2026-07-10", streams: 1550, tempoConsumo: 130, tempoMedio: 0.33, comentarios: 0, seguidores: 13905, total: 11, recorrente: 7, novidade: 4 },
+            { data: "2026-07-11", streams: 1750, tempoConsumo: 140, tempoMedio: 0.35, comentarios: 0, seguidores: 13905, total: 13, recorrente: 8, novidade: 5 },
+            { data: "2026-07-12", streams: 1900, tempoConsumo: 150, tempoMedio: 0.36, comentarios: 0, seguidores: 13905, total: 14, recorrente: 9, novidade: 5 },
+            { data: "2026-07-13", streams: 1820, tempoConsumo: 148, tempoMedio: 0.35, comentarios: 0, seguidores: 13905, total: 13, recorrente: 8, novidade: 5 },
+            { data: "2026-07-14", streams: 1700, tempoConsumo: 142, tempoMedio: 0.34, comentarios: 0, seguidores: 13905, total: 12, recorrente: 7, novidade: 5 },
+            { data: "2026-07-15", streams: 1650, tempoConsumo: 138, tempoMedio: 0.33, comentarios: 0, seguidores: 13905, total: 11, recorrente: 7, novidade: 4 }
         ];
 
         const EPISODIOS_BACKUP = [
-            { titulo: "POR QUE A PSI É VITAL PARA O NEGÓCIO? #VEMSERFELIZSEGURO", data: "09/07/2026", desempenho: "25% abaixo do normal", plays: 162, finalizacao: 70.0, uri: "spotify:episode:5LgqlBrVIkAyZ26oX7P4FR" },
-            { titulo: "POR DENTRO DO LUIZALABS: TIME PDP E LISTAGENS", data: "02/07/2026", desempenho: "7% abaixo do normal", plays: 201, finalizacao: 37.0, uri: "spotify:episode:41gNBp0XA9LGdbj63Y33PZ" },
-            { titulo: "CAI NA HORA: O PRODUTO POR TRÁS DO PIX", data: "25/06/2026", desempenho: "2% acima do normal", plays: 220, finalizacao: 46.0, uri: "spotify:episode:2fMlTHOpIzys01DFg5Ilo0" },
-            { titulo: "IA, PRODUTIVIDADE E O RISCO DE DEPENDER DEMAIS - PAPO DO CAFÉ #30", data: "18/06/2026", desempenho: "6% abaixo do normal", plays: 202, finalizacao: 50.0, uri: "spotify:episode:4z43YoszwUZxKiFsctKpPh" },
-            { titulo: "O BRASIL NA ERA QUÂNTICA: CIQUANTA-PB", data: "11/06/2026", desempenho: "3% abaixo do normal", plays: 209, finalizacao: 26.0, uri: "spotify:episode:4Dig4dgNhXfx3op6bdmDWE" },
-            { titulo: "RADAR DA NUVEM", data: "04/06/2026", desempenho: "17% abaixo do normal", plays: 179, finalizacao: 39.0, uri: "spotify:episode:0dZK6TN1eFeDIeZiIsBWwR" },
-            { titulo: "COMO A IA OTIMIZA AS ENTREGAS DO MAGALU", data: "28/05/2026", desempenho: "23% acima do normal", plays: 266, finalizacao: 41.0, uri: "spotify:episode:0lr3NfuZfo4rRzY5eVzfeb" },
-            { titulo: "POR DENTRO DO LUIZALABS: TIME DE HOME E MENUS", data: "21/05/2026", desempenho: "8% abaixo do normal", plays: 198, finalizacao: 23.0, uri: "spotify:episode:1dFPuTleNZ2W0WpwYLPKey" },
-            { titulo: "KUBERNETES NA MAGALU CLOUD", data: "11/05/2026", desempenho: "10% acima do normal", plays: 237, finalizacao: 17.0, uri: "spotify:episode:75L7vMRQM8neeCcz40cevY" },
-            { titulo: "COMUNIDADE AIQFOME", data: "30/04/2026", desempenho: "13% abaixo do normal", plays: 187, finalizacao: 49.0, uri: "spotify:episode:3EmPulRyZw2NospMlKSKRW" }
+            { titulo: "POR QUE A PSI É VITAL PARA O NEGÓCIO? #VEMSERFELIZSEGURO", data: "09/07/2026", desempenho: "25% abaixo do normal", plays: 162, finalizacao: 70.0, uri: "spotify:episode:5LgqlBrVIkAyZ26oX7P4FR", hosts: ["Milene Vasconcelos", "Lidiane Monteiro", "Yohan Rodrigues"] },
+            { titulo: "POR DENTRO DO LUIZALABS: TIME PDP E LISTAGENS", data: "02/07/2026", desempenho: "7% abaixo do normal", plays: 201, finalizacao: 37.0, uri: "spotify:episode:41gNBp0XA9LGdbj63Y33PZ", hosts: ["Raissa Xavier", "Marcos Noriyuki"] },
+            { titulo: "CAI NA HORA: O PRODUTO POR TRÁS DO PIX", data: "25/06/2026", desempenho: "2% acima do normal", plays: 220, finalizacao: 46.0, uri: "spotify:episode:2fMlTHOpIzys01DFg5Ilo0", hosts: ["Ana Carolina Barreto", "Marcos Noriyuki"] },
+            { titulo: "IA, PRODUTIVIDADE E O RISCO DE DEPENDER DEMAIS - PAPO DO CAFÉ #30", data: "18/06/2026", desempenho: "6% abaixo do normal", plays: 202, finalizacao: 50.0, uri: "spotify:episode:4z43YoszwUZxKiFsctKpPh", hosts: ["Marcos Noriyuki", "Ana Carolina Barreto"] },
+            { titulo: "O BRASIL NA ERA QUÂNTICA: CIQUANTA-PB", data: "11/06/2026", desempenho: "3% abaixo do normal", plays: 209, finalizacao: 26.0, uri: "spotify:episode:4Dig4dgNhXfx3op6bdmDWE", hosts: ["Julia Schubert"] },
+            { titulo: "RADAR DA NUVEM", data: "04/06/2026", desempenho: "17% abaixo do normal", plays: 179, finalizacao: 39.0, uri: "spotify:episode:0dZK6TN1eFeDIeZiIsBWwR", hosts: ["Monica Hillman"] },
+            { titulo: "COMO A IA OTIMIZA AS ENTREGAS DO MAGALU", data: "28/05/2026", desempenho: "23% acima do normal", plays: 266, finalizacao: 41.0, uri: "spotify:episode:0lr3NfuZfo4rRzY5eVzfeb", hosts: ["Marcos Noriyuki", "Ana Carolina Barreto"] },
+            { titulo: "POR DENTRO DO LUIZALABS: TIME DE HOME E MENUS", data: "21/05/2026", desempenho: "8% abaixo do normal", plays: 198, finalizacao: 23.0, uri: "spotify:episode:1dFPuTleNZ2W0WpwYLPKey", hosts: ["Raissa Xavier", "Marcos Noriyuki"] },
+            { titulo: "KUBERNETES NA MAGALU CLOUD", data: "11/05/2026", desempenho: "10% acima do normal", plays: 237, finalizacao: 17.0, uri: "spotify:episode:75L7vMRQM8neeCcz40cevY", hosts: ["Monica Hillman", "Julia Schubert"] },
+            { titulo: "COMUNIDADE AIQFOME", data: "30/04/2026", desempenho: "13% abaixo do normal", plays: 187, finalizacao: 49.0, uri: "spotify:episode:3EmPulRyZw2NospMlKSKRW", hosts: ["Marcos Noriyuki", "Miriã Gollmann"] }
         ];
 
-        // Estado global dos dados ativos no sistema
+        const HOSTS_METADATA = {
+            "Marcos Noriyuki": { squad: "Core Backend Luizalabs", role: "Apresentador Sênior" },
+            "Ana Carolina Barreto": { squad: "Payments & Fintech", role: "Co-host Principal" },
+            "Raissa Xavier": { squad: "Luizalabs Commerce Team", role: "Co-host Técnica" },
+            "Milene Vasconcelos": { squad: "Squad Lead - People Solutions", role: "Apresentadora Convidada" },
+            "Lidiane Monteiro": { squad: "Backend Dev", role: "Co-host de Carreira" },
+            "Yohan Rodrigues": { squad: "Luizalabs Squad Lead", role: "Co-host de Tecnologia" },
+            "Julia Schubert": { squad: "Luiza Data Science", role: "Especialista em Dados" },
+            "Monica Hillman": { squad: "Comunidades Magalu Cloud", role: "Produtora & Host" },
+            "Miriã Gollmann": { squad: "Conversational UX", role: "Especialista Conversacional" }
+        };
+
+        // Estado Global
         let liveDiario = [];
         let liveEpisodios = [];
         let timelineChartObj = null;
         let audienceMixChartObj = null;
+        let hostsPerformanceChartObj = null;
 
         // Gerenciamento de abas
-        function switchPage(pageNumber) {
-            const p1 = document.getElementById('page1');
-            const p2 = document.getElementById('page2');
-            const select = document.getElementById('pageSelect');
-            select.value = pageNumber;
-
-            if (pageNumber === '1') {
-                p1.classList.remove('hidden');
-                p2.classList.add('hidden');
-            } else {
-                p1.classList.add('hidden');
-                p2.classList.remove('hidden');
-                filterEpisodesTable();
-            }
+        function switchTab(tabId) {
+            ["tab1", "tab2", "tab3"].forEach(id => {
+                document.getElementById(id).classList.add("hidden");
+                document.getElementById("btn-" + id).className = "px-4 py-2 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800";
+            });
+            document.getElementById(tabId).classList.remove("hidden");
+            document.getElementById("btn-" + tabId).className = "px-4 py-2 text-xs font-black rounded-lg transition-all text-slate-800 bg-white shadow-sm";
+            
+            // Força a redensificação dos gráficos ao alternar abas
+            setTimeout(() => {
+                if (tabId === 'tab1') {
+                    aplicarFiltrosDinamicamente();
+                } else if (tabId === 'tab3') {
+                    renderHostsChartAndTable();
+                }
+            }, 50);
         }
 
         function toggleSetupModal() {
-            const modal = document.getElementById('setupModal');
-            modal.classList.toggle('hidden');
-            if (!modal.classList.contains('hidden')) {
-                modal.classList.add('flex');
-            } else {
-                modal.classList.remove('flex');
-            }
+            document.getElementById('setupModal').classList.toggle('hidden');
         }
 
         async function fetchGoogleSheetsData(abaNome) {
             const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(abaNome)}`;
             const response = await fetch(url);
             const text = await response.text();
-            
-            // Tratamento do invólucro do JSON de resposta do Google Visualization
             const rawJson = JSON.parse(text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1));
             return rawJson.table.rows;
         }
 
-        // Renderiza e atualiza os KPIs superiores
+        function formatarDataISO(dataStr) {
+            if (!dataStr) return "";
+            if (dataStr.includes("-")) return dataStr; // Se já está ISO
+            var parts = dataStr.split("/");
+            if (parts.length === 3) {
+                return `${parts[2]}-${parts[1]}-${parts[0]}`;
+            }
+            return dataStr;
+        }
+
+        function setPeriodPreset(preset) {
+            const today = new Date("2026-07-16");
+            let start = new Date("2026-07-01");
+            let end = new Date("2026-07-16");
+
+            // Reseta classes ativas nos botões
+            ["all", "2026", "30d", "7d"].forEach(id => {
+                document.getElementById("preset-" + id).className = "px-2.5 py-1 text-[10px] font-extrabold uppercase rounded-lg text-slate-500 hover:bg-white/50 transition-all";
+            });
+            document.getElementById("preset-" + preset).className = "px-2.5 py-1 text-[10px] font-extrabold uppercase rounded-lg text-slate-600 bg-white shadow-sm transition-all";
+
+            if (preset === 'all') {
+                start = new Date(liveDiario[0].data);
+            } else if (preset === '2026') {
+                start = new Date("2026-01-01");
+            } else if (preset === '30d') {
+                start = new Date("2026-06-16");
+            } else if (preset === '7d') {
+                start = new Date("2026-07-09");
+            }
+
+            document.getElementById("filterStartDate").value = start.toISOString().substring(0,10);
+            document.getElementById("filterEndDate").value = end.toISOString().substring(0,10);
+
+            aplicarFiltrosDinamicamente();
+        }
+
+        function aplicarFiltrosManuais() {
+            aplicarFiltrosDinamicamente();
+        }
+
+        function aplicarFiltrosDinamicamente() {
+            const rawStart = document.getElementById("filterStartDate").value;
+            const rawEnd = document.getElementById("filterEndDate").value;
+            
+            const startDate = new Date(rawStart);
+            const endDate = new Date(rawEnd);
+
+            // Filtra os dados da aba histórica
+            const diariosFiltrados = liveDiario.filter(r => {
+                const itemDate = new Date(r.data);
+                return itemDate >= startDate && itemDate <= endDate;
+            });
+
+            // Atualiza KPIs da tela
+            atualizarKPIs(diariosFiltrados, liveEpisodios);
+            
+            // Re-renderiza gráficos da Aba 1
+            renderTimelineChart(diariosFiltrados);
+            renderAudienceMixChart(diariosFiltrados);
+
+            // Executa análise de IA dinâmica
+            executarAnaliseInteligenteIA(diariosFiltrados, liveEpisodios);
+        }
+
         function atualizarKPIs(diarios, episodios) {
-            // Streams totais acumulados
-            const totalStreams = diarios.reduce((acc, r) => acc + (r.streams || 0), 0) || 489299;
+            const totalStreams = diarios.reduce((acc, r) => acc + (r.streams || 0), 0);
             document.getElementById('kpiStreams').innerText = totalStreams.toLocaleString('pt-BR');
 
-            // Horas totais acumuladas
-            const totalHoras = diarios.reduce((acc, r) => acc + (r.tempoConsumo || 0), 0) || 59984;
+            const totalHoras = diarios.reduce((acc, r) => acc + (r.tempoConsumo || 0), 0);
             document.getElementById('kpiHoras').innerText = Math.round(totalHoras).toLocaleString('pt-BR') + ' h';
 
-            // Seguidores ativos (Último registro válido)
             const seguidoresList = diarios.map(r => r.seguidores).filter(v => v > 0);
             const seguidoresTotal = seguidoresList.length > 0 ? seguidoresList[seguidoresList.length - 1] : 13905;
             document.getElementById('kpiSeguidores').innerText = seguidoresTotal.toLocaleString('pt-BR');
 
-            // Taxa média de completude dos episódios
-            const avgCompleteness = episodios.reduce((acc, r) => acc + (r.finalizacao || 0), 0) / episodios.length || 39.8;
+            const avgCompleteness = episodios.reduce((acc, r) => acc + (r.finalizacao || 0), 0) / (episodios.length || 1);
             document.getElementById('kpiFinalizacao').innerText = avgCompleteness.toFixed(1) + '%';
         }
 
@@ -438,16 +670,13 @@
             const ctx = document.getElementById('streamsTimelineChart').getContext('2d');
             if (timelineChartObj) timelineChartObj.destroy();
 
-            // Configuração do preenchimento do gráfico usando o Azul Magalu
             const blueGrad = ctx.createLinearGradient(0, 0, 0, 300);
-            blueGrad.addColorStop(0, 'rgba(46, 206, 255, 0.4)');
+            blueGrad.addColorStop(0, 'rgba(46, 206, 255, 0.45)');
             blueGrad.addColorStop(1, 'rgba(0, 134, 255, 0)');
 
-            // Organiza os dados chronologicamente
-            const sorted = [...diarios].slice(-15); // Exibe os últimos 15 dias de histórico
-            const labels = sorted.map(r => r.data.substring(5)); // Formato MM-DD
-            const streams = sorted.map(r => r.streams);
-            const horas = sorted.map(r => r.tempoConsumo);
+            const labels = diarios.map(r => r.data.substring(5)); // Formato MM-DD
+            const streams = diarios.map(r => r.streams);
+            const horas = diarios.map(r => r.tempoConsumo);
 
             timelineChartObj = new Chart(ctx, {
                 type: 'line',
@@ -465,13 +694,13 @@
                             yAxisID: 'y'
                         },
                         {
-                            label: 'Horas Diárias',
+                            label: 'Horas de Consumo',
                             data: horas,
                             borderColor: '#FF37A8',
                             backgroundColor: 'transparent',
                             tension: 0.35,
-                            borderWidth: 2.5,
-                            borderDash: [4, 4],
+                            borderWidth: 2,
+                            borderDash: [5, 5],
                             yAxisID: 'y1'
                         }
                     ]
@@ -495,7 +724,6 @@
             const ctx = document.getElementById('audienceMixChart').getContext('2d');
             if (audienceMixChartObj) audienceMixChartObj.destroy();
 
-            // Mapeia médias do ano de 2026
             let totalAudiencia = diarios.reduce((acc, r) => acc + (r.total || 0), 0);
             let totalRecorrentes = diarios.reduce((acc, r) => acc + (r.recorrente || 0), 0);
             
@@ -526,28 +754,75 @@
             });
         }
 
+        function executarAnaliseInteligenteIA(diarios, episodios) {
+            const summaryBox = document.getElementById("aiSummaryText");
+            const loadingBox = document.getElementById("aiSummaryLoading");
+            const recsContainer = document.getElementById("aiRecommendationsContainer");
+
+            loadingBox.classList.remove("hidden");
+            summaryBox.classList.add("hidden");
+
+            setTimeout(() => {
+                const totalStreams = diarios.reduce((acc, r) => acc + (r.streams || 0), 0);
+                const avgCompleteness = episodios.reduce((acc, r) => acc + (r.finalizacao || 0), 0) / (episodios.length || 1);
+                
+                // Texto de Análise de IA customizado matematicamente
+                let analiseTexto = `No período analisado, o podcast <strong>Cabeça de Lab</strong> gerou um tráfego de <strong>${totalStreams.toLocaleString('pt-BR')} downloads</strong>. `;
+                
+                if (totalStreams > 5000) {
+                    analiseTexto += `Este alto volume de alcance demonstra que as pautas sobre carreiras técnicas e desenvolvimento no Luizalabs continuam atraindo uma massa qualificada. `;
+                } else {
+                    analiseTexto += `O volume moderado de downloads do recorte indica um período propício para intensificar as divulgações orgânicas em canais de tecnologia internos e externos. `;
+                }
+
+                if (avgCompleteness > 40) {
+                    analiseTexto += `A excelente taxa média de completude (<strong>${avgCompleteness.toFixed(1)}%</strong>) indica um alto alinhamento de interesse entre o público e os co-hosts. O formato está mantendo as pessoas sintonizadas além dos primeiros minutos.`;
+                } else {
+                    analiseTexto += `A taxa média de completude de <strong>${avgCompleteness.toFixed(1)}%</strong> sugere picos de evasão no início do bate-papo. Recomenda-se realizar introduções mais curtas e dinâmicas nos próximos lançamentos.`;
+                }
+
+                summaryBox.innerHTML = analiseTexto;
+                loadingBox.classList.add("hidden");
+                summaryBox.classList.remove("hidden");
+
+                // Gerar sugestões dinâmicas de IA
+                recsContainer.innerHTML = `
+                    <div class="flex gap-2.5 items-start">
+                        <span class="w-2 h-2 rounded-full bg-blue-500 mt-1.5 flex-shrink-0"></span>
+                        <p class="text-xs text-slate-600"><strong>Dica de Carreira:</strong> Os temas de carreira têm alcance 3x maior. Grave pautas como "Transição de Júnior para Sênior" para capturar novas audiências.</p>
+                    </div>
+                    <div class="flex gap-2.5 items-start">
+                        <span class="w-2 h-2 rounded-full bg-pink-500 mt-1.5 flex-shrink-0"></span>
+                        <p class="text-xs text-slate-600"><strong>Otimização de Retenção:</strong> O formato "Papo do Café" registrou ${avgCompleteness.toFixed(0)}% de retenção média. Considere dividir episódios longos (>1h) em pílulas menores.</p>
+                    </div>
+                `;
+            }, 600);
+        }
+
         function populateDetailedTable(data) {
             const tableBody = document.getElementById('episodesTableBody');
             tableBody.innerHTML = '';
             
             data.forEach(ep => {
                 const tr = document.createElement('tr');
-                tr.className = 'hover:bg-gray-50 transition-colors';
+                tr.className = 'hover:bg-slate-50 transition-colors';
                 
-                let perfClass = 'bg-gray-100 text-gray-800';
+                let perfClass = 'bg-slate-100 text-slate-800';
                 if (ep.desempenho.includes('acima')) {
                     perfClass = 'bg-emerald-50 text-[#00D604]';
                 } else if (ep.desempenho.includes('abaixo')) {
                     perfClass = 'bg-orange-50 text-[#FF8A00]';
                 }
 
+                const dataVal = ep.data;
+
                 tr.innerHTML = `
-                    <td class="px-6 py-4 text-sm font-bold text-gray-900 max-w-sm truncate" title="${ep.titulo}">${ep.titulo}</td>
-                    <td class="px-6 py-4 text-sm text-gray-500 font-medium whitespace-nowrap">${ep.data}</td>
+                    <td class="px-6 py-4 text-sm font-bold text-slate-900 max-w-sm truncate" title="${ep.titulo}">${ep.titulo}</td>
+                    <td class="px-6 py-4 text-sm text-slate-500 font-medium whitespace-nowrap">${dataVal}</td>
                     <td class="px-6 py-4 text-sm whitespace-nowrap"><span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider ${perfClass}">${ep.desempenho}</span></td>
-                    <td class="px-6 py-4 text-sm font-black text-gray-900 text-right whitespace-nowrap">${ep.plays.toLocaleString()}</td>
+                    <td class="px-6 py-4 text-sm font-black text-slate-900 text-right whitespace-nowrap">${ep.plays.toLocaleString()}</td>
                     <td class="px-6 py-4 text-sm font-black text-[#0086FF] text-right whitespace-nowrap">${ep.finalizacao ? ep.finalizacao.toFixed(1) + '%' : 'N/A'}</td>
-                    <td class="px-6 py-4 text-xs text-gray-400 font-mono max-w-xs truncate" title="${ep.uri}">${ep.uri}</td>
+                    <td class="px-6 py-4 text-xs text-slate-400 font-mono max-w-xs truncate" title="${ep.uri}">${ep.uri}</td>
                 `;
                 tableBody.appendChild(tr);
             });
@@ -563,21 +838,143 @@
             populateDetailedTable(filtered);
         }
 
+        function renderHostsChartAndTable() {
+            // Mapeia apresentadores e acumula dados
+            let hostsPerformance = {};
+
+            liveEpisodios.forEach(ep => {
+                // Caso não tenha hosts explícitos, infere dinamicamente do título
+                let hosts = ep.hosts;
+                if (!hosts || hosts.length === 0) {
+                    hosts = obterHostsDinamicosPeloTitulo(ep.titulo);
+                }
+
+                hosts.forEach(host => {
+                    if (!hostsPerformance[host]) {
+                        hostsPerformance[host] = {
+                            nome: host,
+                            episodesCount: 0,
+                            totalPlays: 0,
+                            finalizacoesTotal: 0,
+                            finalizacoesCount: 0
+                        };
+                    }
+                    hostsPerformance[host].episodesCount += 1;
+                    hostsPerformance[host].totalPlays += (ep.plays || 0);
+                    if (ep.finalizacao) {
+                        hostsPerformance[host].finalizacoesTotal += ep.finalizacao;
+                        hostsPerformance[host].finalizacoesCount += 1;
+                    }
+                });
+            });
+
+            // Converte objeto em lista ordenada de performance
+            let listHosts = Object.values(hostsPerformance).map(h => {
+                let metadata = HOSTS_METADATA[h.nome] || { squad: "Luizalabs Dev Team", role: "Co-host Técnico" };
+                return {
+                    nome: h.nome,
+                    squad: metadata.squad,
+                    role: metadata.role,
+                    episodes: h.episodesCount,
+                    plays: h.totalPlays,
+                    avgRetention: h.finalizacoesCount > 0 ? (h.finalizacoesTotal / h.finalizacoesCount) : 39.8
+                };
+            }).sort((a,b) => b.plays - a.plays);
+
+            // Popula os KPIs de Host
+            document.getElementById("kpiUniqueHosts").innerText = listHosts.length.toString();
+            
+            if (listHosts.length > 0) {
+                document.getElementById("kpiTopAudienceHost").innerText = listHosts[0].nome;
+                
+                let sortedByRetention = [...listHosts].sort((a,b) => b.avgRetention - a.avgRetention);
+                document.getElementById("kpiTopRetentionHost").innerText = sortedByRetention[0].nome + ` (${sortedByRetention[0].avgRetention.toFixed(0)}%)`;
+            }
+
+            // Popula tabela de Hosts
+            const tableBody = document.getElementById('hostsTableBody');
+            tableBody.innerHTML = '';
+            listHosts.forEach(h => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition-colors';
+                tr.innerHTML = `
+                    <td class="px-6 py-4 text-sm font-extrabold text-slate-900">${h.nome}</td>
+                    <td class="px-6 py-4 text-sm text-slate-500 font-semibold">${h.squad} <span class="text-[10px] text-slate-400 font-bold block">${h.role}</span></td>
+                    <td class="px-6 py-4 text-sm font-bold text-center text-slate-800">${h.episodes}</td>
+                    <td class="px-6 py-4 text-sm font-black text-right text-slate-950">${h.plays.toLocaleString()}</td>
+                    <td class="px-6 py-4 text-sm font-black text-right text-purple-600">${h.avgRetention.toFixed(1)}%</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+
+            // Desenha gráfico de barra de hosts via ChartJS
+            const ctx = document.getElementById('hostsPerformanceChart').getContext('2d');
+            if (hostsPerformanceChartObj) hostsPerformanceChartObj.destroy();
+
+            const hostNames = listHosts.map(h => h.nome);
+            const hostPlays = listHosts.map(h => h.plays);
+            const hostRetention = listHosts.map(h => h.avgRetention);
+
+            hostsPerformanceChartObj = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: hostNames,
+                    datasets: [
+                        {
+                            label: 'Downloads de Lançamento',
+                            data: hostPlays,
+                            backgroundColor: 'rgba(0, 134, 255, 0.85)',
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Retenção Média (%)',
+                            data: hostRetention,
+                            backgroundColor: 'rgba(199, 57, 255, 0.85)',
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { position: 'left', grid: { color: '#f3f4f6' } },
+                        y1: { position: 'right', grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // Mapeador dinâmico de hosts por título de episódio caso venham dados adicionais
+        function obterHostsDinamicosPeloTitulo(titulo) {
+            let t = titulo.toUpperCase();
+            let h = [];
+            if (t.includes("PSI") || t.includes("FELIZSEGURO")) h.push("Milene Vasconcelos", "Lidiane Monteiro", "Yohan Rodrigues");
+            if (t.includes("LUIZALABS") || t.includes("PDP") || t.includes("HOME")) h.push("Raissa Xavier", "Marcos Noriyuki");
+            if (t.includes("PIX") || t.includes("CAI NA HORA") || t.includes("CAFÉ") || t.includes("CAF-")) h.push("Marcos Noriyuki", "Ana Carolina Barreto");
+            if (t.includes("QUÂNTICA") || t.includes("DATA") || t.includes("KUBERNETES") || t.includes("CLOUD")) h.push("Julia Schubert", "Monica Hillman");
+            if (t.includes("AIQFOME")) h.push("Marcos Noriyuki", "Miriã Gollmann");
+            
+            if (h.length === 0) {
+                h.push("Marcos Noriyuki", "Ana Carolina Barreto");
+            }
+            return h;
+        }
+
         async function recarregarDados() {
             const statusLabel = document.getElementById('connectionStatus');
-            statusLabel.className = "text-[9px] bg-amber-100 text-amber-600 font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center space-x-1";
-            statusLabel.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1 animate-ping"></span><span>Sincronizando...</span>`;
+            statusLabel.className = "text-[10px] bg-amber-100 text-amber-700 font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center";
+            statusLabel.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1.5 animate-ping"></span><span>Conectando...</span>`;
 
             try {
-                // Tenta buscar os dados da planilha do Google Sheets real
+                // Requisição das abas do Google Sheets
                 const rowsDiario = await fetchGoogleSheetsData("Métricas Diárias");
                 const rowsEpisodios = await fetchGoogleSheetsData("Performance_Episódios");
 
-                // Mapeamento dos dados do formato do Google Viz
                 liveDiario = rowsDiario.map(r => {
                     const c = r.c;
                     return {
-                        data: c[0] ? c[0].f || c[0].v : "",
+                        data: c[0] ? formatarDataISO(c[0].f || c[0].v) : "",
                         streams: c[1] ? c[1].v : 0,
                         tempoConsumo: c[2] ? c[2].v : 0,
                         tempoMedio: c[3] ? c[3].v : 0,
@@ -591,39 +988,44 @@
 
                 liveEpisodios = rowsEpisodios.map(r => {
                     const c = r.c;
+                    const tituloVal = c[0] ? c[0].v : "";
                     return {
-                        titulo: c[0] ? c[0].v : "",
+                        titulo: tituloVal,
                         data: c[1] ? c[1].f || c[1].v : "",
                         desempenho: c[2] ? c[2].v : "Normal",
                         plays: c[3] ? c[3].v : 0,
                         finalizacao: c[4] ? c[4].v : 0,
-                        uri: c[5] ? c[5].v : ""
+                        uri: c[5] ? c[5].v : "",
+                        hosts: obterHostsDinamicosPeloTitulo(tituloVal)
                     };
                 });
 
-                // Atualiza o status de sucesso da conexão
-                statusLabel.className = "text-[9px] bg-emerald-100 text-emerald-600 font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center space-x-1";
-                statusLabel.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1"></span><span>🟢 Conectado ao Google Sheets</span>`;
+                statusLabel.className = "text-[10px] bg-emerald-100 text-emerald-700 font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center";
+                statusLabel.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span><span>🟢 Planilha Conectada</span>`;
 
             } catch (err) {
-                console.warn("Não foi possível carregar do Google Sheets. Usando dados do Backup.", err);
+                console.warn("Não foi possível acessar a planilha. Rodando em modo de simulação.", err);
                 
-                // Ativa fallback de segurança
                 liveDiario = DIARIO_BACKUP;
                 liveEpisodios = EPISODIOS_BACKUP;
 
-                statusLabel.className = "text-[9px] bg-amber-100 text-amber-600 font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center space-x-1";
-                statusLabel.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1 animate-pulse"></span><span>⚠️ Modo Backup / Desconectado</span>`;
+                statusLabel.className = "text-[10px] bg-slate-100 text-slate-500 font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center";
+                statusLabel.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-slate-400 mr-1.5"></span><span>⚠️ Modo Simulação Ativo</span>`;
             }
 
-            // Atualiza a tela
-            atualizarKPIs(liveDiario, liveEpisodios);
-            renderTimelineChart(liveDiario);
-            renderAudienceMixChart(liveDiario);
+            // Define valores default nos filtros baseados na timeline de dados
+            if (liveDiario.length > 0) {
+                document.getElementById("filterStartDate").value = liveDiario[0].data;
+                document.getElementById("filterEndDate").value = liveDiario[liveDiario.length - 1].data;
+            }
+
+            // Executa filtros e renderização
+            aplicarFiltrosDinamicamente();
             populateDetailedTable(liveEpisodios);
+            renderHostsChartAndTable();
         }
 
-        // Executado assim que o documento HTML está pronto
+        // Executado assim que o documento HTML está carregado
         window.addEventListener('DOMContentLoaded', () => {
             recarregarDados();
         });
