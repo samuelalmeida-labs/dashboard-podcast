@@ -967,7 +967,6 @@
             statusLabel.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1.5 animate-ping"></span><span>Conectando...</span>`;
 
             try {
-                // Requisição das abas do Google Sheets
                 const rowsDiario = await fetchGoogleSheetsData("Métricas Diárias");
                 const rowsEpisodios = await fetchGoogleSheetsData("Performance_Episódios");
 
@@ -989,14 +988,24 @@
                 liveEpisodios = rowsEpisodios.map(r => {
                     const c = r.c;
                     const tituloVal = c[0] ? c[0].v : "";
+                    
+                    let hostsList = [];
+                    if (c[5] && c[5].v && c[5].v.trim() !== "") {
+                        // Se a planilha tiver os hosts separados por vírgula na coluna 6
+                        hostsList = c[5].v.split(",").map(h => h.trim());
+                    } else {
+                         // Fallback: infere pelo título se a coluna estiver vazia
+                        hostsList = obterHostsDinamicosPeloTitulo(tituloVal);
+                    }
+
                     return {
                         titulo: tituloVal,
                         data: c[1] ? c[1].f || c[1].v : "",
                         desempenho: c[2] ? c[2].v : "Normal",
                         plays: c[3] ? c[3].v : 0,
                         finalizacao: c[4] ? c[4].v : 0,
-                        uri: c[5] ? c[5].v : "",
-                        hosts: obterHostsDinamicosPeloTitulo(tituloVal)
+                        uri: c[5] && c[5].v && String(c[5].v).includes("spotify:") ? c[5].v : "", // Tratamento caso a coluna 6 seja o host e não a URI
+                        hosts: hostsList
                     };
                 });
 
@@ -1013,10 +1022,14 @@
                 statusLabel.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-slate-400 mr-1.5"></span><span>⚠️ Modo Simulação Ativo</span>`;
             }
 
-            // Define valores default nos filtros baseados na timeline de dados
             if (liveDiario.length > 0) {
-                document.getElementById("filterStartDate").value = liveDiario[0].data;
-                document.getElementById("filterEndDate").value = liveDiario[liveDiario.length - 1].data;
+                // Filtra as datas vazias e ordena
+                const datasValidas = liveDiario.map(d => d.data).filter(d => d && d !== "");
+                if(datasValidas.length > 0){
+                    const sortedDates = datasValidas.sort();
+                    document.getElementById("filterStartDate").value = sortedDates[0];
+                    document.getElementById("filterEndDate").value = sortedDates[sortedDates.length - 1];
+                }
             }
 
             // Executa filtros e renderização
